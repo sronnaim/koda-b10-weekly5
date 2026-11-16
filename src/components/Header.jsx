@@ -84,7 +84,7 @@ export default function Header() {
               Sign In
             </Link>
             <Link
-              to="/file-report"
+              to="/report/new"
               class="flex justify-center bg-primary py-2 px-3 text-on-primary rounded-full"
             >
               <svg

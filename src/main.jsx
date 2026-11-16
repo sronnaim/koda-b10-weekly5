@@ -16,8 +16,11 @@ const router = createBrowserRouter([{
     path: '',
     Component: HomePage
   }, {
-    path: 'file-report',
-    Component: FileReport,
+    path: '/report',
+    children: [{
+      path: '/report/new',
+      Component: FileReport,
+    }]
   }, {
     path: 'profile',
     Component: Profile
@@ -30,6 +33,9 @@ const router = createBrowserRouter([{
   }, {
     path: 'help',
     Component: Help
+  }, {
+    path: 'profile',
+    Component: Profile
   }]
 }])
 

@@ -21,7 +21,7 @@ export default function Footer() {
             <h3>Citizens</h3>
             <ul>
               <li>
-                <Link to="/file-report">File a report</Link>
+                <Link to="/report/new">File a report</Link>
               </li>
               <li>
                 <Link to="/track">Track complaint</Link>
