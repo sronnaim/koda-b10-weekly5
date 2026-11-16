@@ -1,5 +1,32 @@
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { LuLogIn, LuPlus } from 'react-icons/lu'
+import { LuLogIn, LuPlus, LuMenu } from 'react-icons/lu'
+import { useBodyData } from '../hooks/useBodyData'
+
+/**
+ * @param {React.ButtonHTMLAttributes<HTMLButtonElement>} props
+ */
+function MenuBtn(props) {
+  const [open, setOpen] = useState(false)
+  useBodyData('data-menu', open ? 'opened' : 'closed')
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 768) setOpen(false)
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [setOpen])
+
+  return (
+    <button onClick={() => setOpen(!open)} {...props} type='button'>
+      <span className='sr-only'>{!open ? 'Open Menu' : 'Close Menu'}</span>
+      <LuMenu />
+    </button>
+  )
+}
 
 export default function Header() {
   return (
@@ -79,6 +106,7 @@ export default function Header() {
             </Link>
           </div>
         </div>
+        <MenuBtn className='absolute right-4 top-5 md:hidden' />
       </div>
     </header>
   )
