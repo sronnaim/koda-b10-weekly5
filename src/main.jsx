@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import Feed from './pages/Feed'
 import Track from './pages/Track'
 import Help from './pages/Help'
+import Report from './pages/Report'
 
 const router = createBrowserRouter([{
   Component: AppLayout,
@@ -20,6 +21,9 @@ const router = createBrowserRouter([{
     children: [{
       path: '/report/new',
       Component: FileReport,
+    }, {
+      path: '/report/:slug',
+      Component: Report
     }]
   }, {
     path: 'profile',

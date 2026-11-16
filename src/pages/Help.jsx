@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 export default function Help() {
   return (
     <main class="mx-auto grow container max-w-272 px-4">
-      <div class="help mt-10 md:mt-16">
+      <div class="mt-10 md:mt-16">
         <div>
           <div>
             <hgroup
