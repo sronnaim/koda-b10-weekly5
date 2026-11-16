@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { LuLogIn, LuPlus, LuMenu } from 'react-icons/lu'
 import { useBodyData } from '../hooks/useBodyData'
@@ -28,7 +28,16 @@ function MenuBtn(props) {
   )
 }
 
-export default function Header() {
+/**
+ * @typedef {Object} HeaderProps
+ * @property {(boolean) => void} onLogin
+ */
+
+/**
+ * 
+ * @param {HeaderProps} props 
+ */
+export default function Header({ onLogin }) {
   return (
     <header class="z-50 bg-surface-container [body[data-menu=opened]_&]:h-screen sticky [body[data-menu=opened]_&]:fixed inset-0 border-b border-outline">
       <div class="p-1 mx-auto h-full flex [body[data-menu=opened]_&]:flex-col items-center [body[data-menu=opened]_&]:justify-center relative md:max-w-272">
@@ -90,16 +99,17 @@ export default function Header() {
             </ul>
           </nav>
           <div class="md:flex md:items-center">
-            <Link
+            <button
               to="/login"
-              class="flex justify-center py-2 px-3 rounded-full"
+              class="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
+              onClick={onLogin}
             >
               <LuLogIn />
               Sign In
-            </Link>
+            </button>
             <Link
               to="/report/new"
-              class="flex justify-center bg-primary py-2 px-3 text-on-primary rounded-full"
+              class="flex justify-center items-center gap-2 bg-primary py-2 px-3 text-on-primary rounded-full"
             >
               <LuPlus />
               Report
