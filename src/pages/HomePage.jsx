@@ -1,3 +1,5 @@
+import { Link } from 'react-router'
+
 export default function HomePage() {
   return (
     <main class="max-w-272 container grow mx-auto px-4">
@@ -99,7 +101,7 @@ export default function HomePage() {
             <h2 class="text-xl font-serif text-secondary font-semibold">Recent Community Reports</h2>
             <p class="text-xs">Verified reports lodged in Jakarta and surrounding regions</p>
           </div>
-          <a href="/feed.html" class="text-xs flex flex-col font-semibold text-primary md:translate-y-4">
+          <a href="/feed" class="text-xs flex flex-col font-semibold text-primary md:translate-y-4">
             View live feed →
           </a>
         </div>
@@ -157,9 +159,9 @@ export default function HomePage() {
                   <span class="sr-only">Liked by 148 citizens</span>
                   <span aria-hidden="true">148</span>
                 </button>
-                <a href="/report1.html">
+                <Link href="/report/x">
                   Inspect →
-                </a>
+                </Link>
               </div>
             </div>
           </li>

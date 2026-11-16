@@ -36,10 +36,10 @@ export default function Footer() {
             <h3>Agencies</h3>
             <ul>
               <li>
-                <a href="/bureaus.html">Participating bureaus</a>
+                <a href="/agencies">Participating bureaus</a>
               </li>
               <li>
-                <a href="/triage-queue.html">Officer triage queue</a>
+                <a href="/triage">Officer triage queue</a>
               </li>
               <li>
                 <a href="/benchmarks.html">SLA benchmarks</a>

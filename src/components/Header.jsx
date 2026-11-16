@@ -1,9 +1,11 @@
+import { Link } from 'react-router'
+
 export default function Header() {
   return (
     <header class="z-50 bg-surface-container [body[data-menu=opened]_&]:h-screen sticky [body[data-menu=opened]_&]:fixed inset-0 border-b border-outline">
       <div class="p-1 mx-auto h-full flex [body[data-menu=opened]_&]:flex-col items-center [body[data-menu=opened]_&]:justify-center relative md:max-w-272">
-        <a
-          href="/index.html"
+        <Link
+          to="/"
           class="inline-flex items-center font-serif font-bold text-lg p-2 text-secondary"
         >
           <svg
@@ -29,39 +31,39 @@ export default function Header() {
             />
           </svg>
           WargaReport
-        </a>
+        </Link>
         <div class="grow hidden flex-col font-medium justify-center [body[data-menu=opened]_&]:flex md:flex md:flex-row md:items-center text-sm [&_a]:py-2 [&_a]:px-4 [&_a]:flex [&_a]:items-center [&_a]:text-center [&_a]:gap-2">
           <nav class="md:grow">
             <ul class="md:flex md:items-center md:justify-center">
               <li>
-                <a
-                  href="/feed.html"
+                <Link
+                  to="/feed"
                   class="flex justify-center py-2 px-3 rounded-full"
                 >
                   Live Feed
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/track.html"
+                <Link
+                  to="/track"
                   class="flex justify-center py-2 px-3 rounded-full"
                 >
                   Track
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/help.html"
+                <Link
+                  to="/help"
                   class="flex justify-center py-2 px-3 rounded-full"
                 >
                   How It Works
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
           <div class="md:flex md:items-center">
-            <a
-              href="/login.html"
+            <Link
+              to="/login"
               class="flex justify-center py-2 px-3 rounded-full"
             >
               <svg
@@ -80,9 +82,9 @@ export default function Header() {
                 <path d="M5 8.5L7.5 6L5 3.5" /> <path d="M7.5 6H1.5" />
               </svg>
               Sign In
-            </a>
-            <a
-              href="/report-an-issue.html"
+            </Link>
+            <Link
+              to="/file-report"
               class="flex justify-center bg-primary py-2 px-3 text-on-primary rounded-full"
             >
               <svg
@@ -107,7 +109,7 @@ export default function Header() {
                 />
               </svg>
               Report
-            </a>
+            </Link>
           </div>
         </div>
       </div>
