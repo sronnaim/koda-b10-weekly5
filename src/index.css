@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Fraunces', serif;
+  --font-sans: 'Public Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --color-surface: rgba(247, 242, 231, 1);
+  --color-on-surface: rgba(76, 91, 82, 1);
+  --color-on-surface-low: rgba(132, 146, 138, 1);
+  --color-on-surface-high: rgba(76, 91, 82, 1);
+
+  --color-surface-container: rgba(255, 253, 248, 1);
+
+  --color-secondary: rgba(19, 35, 27, 1);
+  --color-on-secondary: var(--color-surface-container);
+
+  --color-primary: rgba(15, 107, 79);
+  --color-on-primary: var(--color-surface-container);
+
+  --color-info: rgba(47, 96, 126);
+  --color-on-info: var(--color-surface-container);
+  --color-info-container: rgba(232, 241, 245, 1);
+  --color-on-info-container: rgba(47, 96, 126, 1);
+
+  --color-warning: rgba(150, 104, 15, 1);
+  --color-on-warning: var(--color-surface-container);
+  --color-warning-container: rgba(251, 241, 216, 1);
+  --color-on-warning-container: rgba(150, 104, 15, 1);
+
+  --color-success: rgba(33, 122, 81, 1);
+  --color-on-success: var(--color-surface-container);
+  --color-success-container: rgba(229, 243, 234, 1);
+  --color-on-success-container: rgba(33, 122, 81, 1);
+
+  --color-danger: rgba(163, 63, 49, 1);
+  --color-on-danger: var(--color-surface-container);
+  --color-danger-container: rgba(249, 234, 229, 1);
+  --color-on-danger-container: rgba(163, 63, 49, 1);
+
+  --color-outline: rgba(215, 203, 182, 1);
+  --color-outline-variant: rgba(232, 224, 209, 1);
+
+  --text-2xs: 0.625rem;
+}
