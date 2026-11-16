@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { LuLogIn, LuPlus } from 'react-icons/lu'
 
 export default function Header() {
   return (
@@ -66,48 +67,14 @@ export default function Header() {
               to="/login"
               class="flex justify-center py-2 px-3 rounded-full"
             >
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke="currentColor"
-              >
-
-                <path d="M7.5 1.5H9.5C9.76522 1.5 10.0196 1.60536 10.2071 1.79289C10.3946 1.98043 10.5 2.23478 10.5 2.5V9.5C10.5 9.76522 10.3946 10.0196 10.2071 10.2071C10.0196 10.3946 9.76522 10.5 9.5 10.5H7.5" />
-                <path d="M5 8.5L7.5 6L5 3.5" /> <path d="M7.5 6H1.5" />
-              </svg>
+              <LuLogIn />
               Sign In
             </Link>
             <Link
               to="/report/new"
               class="flex justify-center bg-primary py-2 px-3 text-on-primary rounded-full"
             >
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  d="M6 2.5V9.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke="currentColor"
-                />
-                <path
-                  d="M2.5 6H9.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke="currentColor"
-                />
-              </svg>
+              <LuPlus />
               Report
             </Link>
           </div>
