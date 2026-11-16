@@ -1,15 +1,17 @@
+import { Link } from "react-router"
+
 export default function Footer() {
   return (
     <footer class="bg-surface-container border-t border-outline mt-30 px-4 py-13">
       <div class="max-w-272 container m-auto grid gap-4 md:grid-cols-2">
         <div class="md:max-w-100 grid gap-6">
-          <a href="/index.html" class="font-serif text-xl font-bold text-secondary">WargaReport</a>
+          <Link to="/" class="font-serif text-xl font-bold text-secondary">WargaReport</Link>
           <p class="text-sm">WargaReport is an independent civic reporting platform for municipal infrastructure
             issues across
             Indonesia. Residents submit evidence, follow SLA countdowns, and track resolution updates from the
             responsible agencies.</p>
-          <p class="text-danger font-medium"><em class="not-italic">Not for life-threatening emergencies, call <a
-            href="tel:112">112</a>
+          <p class="text-danger font-medium"><em class="not-italic">Not for life-threatening emergencies, call <Link
+            to="tel:112">112</Link>
             (National Emergency Call Center) or BPBD DKI directly.</em></p>
         </div>
 
@@ -19,16 +21,16 @@ export default function Footer() {
             <h3>Citizens</h3>
             <ul>
               <li>
-                <a href="/report-an-issue.html">File a report</a>
+                <Link to="/file-report">File a report</Link>
               </li>
               <li>
-                <a href="/track.html">Track complaint</a>
+                <Link to="/track">Track complaint</Link>
               </li>
               <li>
-                <a href="/reports-registry.html">Public reports registry</a>
+                <Link to="/reports-registry">Public reports registry</Link>
               </li>
               <li>
-                <a href="/filing-history.html">My filing history</a>
+                <Link to="/myfiling">My filing history</Link>
               </li>
             </ul>
           </div>
@@ -36,13 +38,13 @@ export default function Footer() {
             <h3>Agencies</h3>
             <ul>
               <li>
-                <a href="/agencies">Participating bureaus</a>
+                <Link to="/agencies">Participating bureaus</Link>
               </li>
               <li>
-                <a href="/triage">Officer triage queue</a>
+                <Link to="/triage">Officer triage queue</Link>
               </li>
               <li>
-                <a href="/benchmarks.html">SLA benchmarks</a>
+                <Link to="/benchmarks">SLA benchmarks</Link>
               </li>
             </ul>
           </div>
@@ -50,13 +52,13 @@ export default function Footer() {
             <h3>Civic Trust</h3>
             <ul>
               <li>
-                <a href="/help.html">Help &amp; FAQs</a>
+                <Link to="/help">Help &amp; FAQs</Link>
               </li>
               <li>
-                <a href="/guidelines.html">Evidence guidelines</a>
+                <Link to="/guidelines">Evidence guidelines</Link>
               </li>
               <li>
-                <a href="/policy.html">PII &amp; redaction policy</a>
+                <Link to="/policy">PII &amp; redaction policy</Link>
               </li>
             </ul>
           </div>
