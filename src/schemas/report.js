@@ -1,4 +1,57 @@
+import { LuBuilding, LuDroplet, LuSun, LuTrash2, LuTriangleAlert, LuVolume } from 'react-icons/lu'
 import { boolean, number, object, string } from 'yup'
+
+export const CATEGORIES = {
+  'cat-1': {
+    label: "Roads & Transit",
+    Icon: LuTriangleAlert,
+    sla: '48h',
+    short: 'Pothole / Sidewalk (Trotoar)',
+    long: 'Potholes, broken sidewalk slabs, damaged drainage grates'
+  },
+  'cat-2': {
+    label: "Water & Sewage",
+    Icon: LuDroplet,
+    sla: '24h',
+    short: 'Water Burst / Pipa Bocor',
+    long: 'Pipeline bursts, flooding tap leaks, dry taps'
+  },
+  'cat-3': {
+    label: "Street Lighting",
+    Icon: LuSun,
+    sla: '72h',
+    short: 'Dark Street / PJU Padam',
+    long: 'Dark street lamps (PJU), damaged base poles, broken traffic signals'
+  },
+  'cat-4': {
+      label: "Sanitation & Waste",
+    Icon: LuTrash2,
+    sla: '36h',
+    short: 'Trash Pile / Sampah Liar',
+    long: 'Illegal dump spots in alleys, overflowing TPS bins, river refuse'
+  },
+  'cat-5': {
+          label: "Public Parks & Trees",
+    Icon: LuTrash2,
+    sla: '48h',
+    short: 'Hazardous Tree / Rawan Tumbang',
+    long: 'Falling branches (pohon rawan tumbang), RPTRA playground hazards'
+  },
+  'cat-6': {
+          label: "Noise & Disturbance",
+    Icon: LuVolume,
+    sla: '48h',
+    short: 'Late-night Noise / Ketertiban',
+    long: 'Nocturnal construction past 22:00 WIB, sidewalk encroachment'
+  },
+  'cat-7': {
+          label: "Building & Zoning",
+    Icon: LuBuilding,
+    sla: '72h',
+    short: 'Unsafe Construction / Bangunan',
+    long: 'Unsafe scaffolding, structural hazards, building boundary violations'
+  }
+}
 
 export const CATEGORY_IDS = ['cat-1', 'cat-2', 'cat-3', 'cat-4', 'cat-5', 'cat-6', 'cat-7']
 export const AREA_IDS = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6']

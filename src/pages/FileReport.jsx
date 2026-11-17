@@ -68,23 +68,21 @@ export default function FileReport() {
               municipal services.</p>
           </div>
           <ol className="flex flex-col text-xs gap-1 text-on-surface-low">
-            <li
-              className="px-4 py-3 flex gap-2 rounded-full [body[data-new-report='1']_&]:bg-primary [body[data-new-report='1']_&]:text-on-primary [body[data-new-report='1']_&]:*:first:text-white/75">
+            <li data-current={step === 0}
+              className="px-4 py-3 flex gap-2 rounded-full data-[current=true]:bg-primary data-[current=true]:text-on-primary data-[current=true]:*:first:text-white/75">
               <span className="font-mono">01</span>
               Topic
             </li>
-            <li
-              className="p-3 flex gap-2 rounded-full [body[data-new-report='2']_&]:bg-primary [body[data-new-report='2']_&]:text-on-primary [body[data-new-report='2']_&]:*:first:text-white/75">
-              <span className="font-mono">02</span>
+            <li data-current={step === 1}
+              className="px-4 py-3 flex gap-2 rounded-full data-[current=true]:bg-primary data-[current=true]:text-on-primary data-[current=true]:*:first:text-white/75">              <span className="font-mono">02</span>
               Location
             </li>
-            <li
-              className="p-3 flex gap-2 rounded-full [body[data-new-report='3']_&]:bg-primary [body[data-new-report='3']_&]:text-on-primary [body[data-new-report='3']_&]:*:first:text-white/75">
-              <span className="font-mono">03</span>
+            <li data-current={step === 2}
+              className="px-4 py-3 flex gap-2 rounded-full data-[current=true]:bg-primary data-[current=true]:text-on-primary data-[current=true]:*:first:text-white/75">              <span className="font-mono">03</span>
               Proof
             </li>
-            <li
-              className="p-3 flex gap-2 rounded-full [body[data-new-report='4']_&]:bg-primary [body[data-new-report='4']_&]:text-on-primary [body[data-new-report='4']_&]:*:first:text-white/75">
+            <li data-current={step === 3}
+              className="px-4 py-3 flex gap-2 rounded-full data-[current=true]:bg-primary data-[current=true]:text-on-primary data-[current=true]:*:first:text-white/75">
               <span className="font-mono">04</span>
               Review & Send
             </li>

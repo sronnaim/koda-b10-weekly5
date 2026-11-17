@@ -75,7 +75,7 @@ function HomeFeed({ reports }) {
       </div>
       <ol
         className="mt-6 grid md:grid-cols-2 gap-4 [&_li]:grid [&_li]:gap-2 [&_li]:lg:grid-cols-[auto_1fr] [&_li]:p-4 [&_li]:rounded-2xl [&_li]:border [&_li]:border-outline [&_li]:max-w-96 [&_li]:lg:max-w-none [&_li]:mx-auto [&_li]:bg-surface-container [&_li>:first-child,&_li_img]:aspect-square [&_li>:first-child]:rounded-2xl [&_li>:first-child]:overflow-hidden [&_li>:first-child]:lg:max-w-24 [&_li_img]:w-full [&_li_img]:object-cover">
-        {reports && reports.length > 0 && reports.map(r => <Card report={r} />)}
+        {reports && reports.length > 0 && reports.slice(0, 4).map(r => <Card report={r} />)}
       </ol>
     </section>
 
