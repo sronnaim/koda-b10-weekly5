@@ -1,7 +1,6 @@
-import { useState } from "react"
 import { LuMail, LuArrowRight, LuX, LuUser, LuCircleCheckBig } from "react-icons/lu"
 import PasswordField from "./PasswordField"
-import { useForm } from "react-hook-form"
+import { useState } from "react"
 
 /**
  * @typedef {Object} ModeBtnProps
@@ -28,7 +27,7 @@ function LoginForm() {
         <span className="focus-within:shadow-[0_0_0_3px_black] focus-within:shadow-primary/50 focus-within:outline-primary focus-within:outline-1 flex items-center text-on-surface-low gap-2 border px-3 mt-2 border-outline rounded-xl">
           <LuMail />
           <input type="email" autoComplete="email" name="email"
-            placeholder="Enter your Email" className="py-3 w-full [&:focus]:shadow-none [&:focus]:outline-none [&:focus]:border-none" />
+            placeholder="Enter your Email" className="py-3 w-full focus:shadow-none! focus:outline-none! focus:border-none!" />
         </span>
       </label>
       <PasswordField type="password" autoComplete="current-password" name="password"
@@ -46,7 +45,7 @@ function RegisterForm() {
         <span className="focus-within:shadow-[0_0_0_3px_black] focus-within:shadow-primary/50 focus-within:outline-primary focus-within:outline-1 flex items-center text-on-surface-low gap-2 border px-3 mt-2 border-outline rounded-xl">
           <LuUser />
           <input type="text" autoComplete="name"
-            placeholder="e.g Budi Santoso" name="name" className="py-3 w-full [&:focus]:shadow-none [&:focus]:outline-none [&:focus]:border-none" />
+            placeholder="e.g Budi Santoso" name="name" className="py-3 w-full focus:shadow-none! focus:outline-none! focus:border-none!" />
         </span>
       </label>
       <div className="flex items-center gap-4 w-full flex-wrap">
@@ -76,25 +75,29 @@ function RegisterForm() {
 
 /**
  * @typedef {Object} AuthModalProps
- * @property {(boolean) => void} onClose
+ * @property {import("react").RefObject} dialogRef
  */
 
 /**
  * 
  * @param {AuthModalProps} props 
  */
-function AuthModal({ onClose }) {
-  const [mode, setMode] = useState("login")
+function AuthModal({ dialogRef }) {
+  const [mode, setMode] = useState('login')
 
+  function handleClose() {
+    if (dialogRef.current)
+      dialogRef.current.close()
+  }
   return (
-    <dialog id="login" className="absolute inset-0 bg-secondary/55 backdrop-blur-sm flex justify-center items-center w-full h-full z-100">
-      <div className="bg-surface-container rounded-2xl overflow-hidden border w-full max-w-139 border-outline mx-4 *:px-6 ">
+    <dialog ref={dialogRef} id="login" className="text-on-surface backdrop:bg-on-surface-high/25 backdrop:backdrop-blur-lg justify-center w-full bg-transparent max-w-139 m-auto items-center z-100 open:flex">
+      <div className="rounded-2xl overflow-hidden border w-full  bg-surface-container border-outline mx-4 *:px-6 ">
         <hgroup className="bg-surface py-6 relative grid grid-cols-[1fr_auto]">
           <h1 className="text-lg text-secondary font-semibold font-serif">Sign In to WargaReport</h1>
           <p className="text-xs col-span-2">Sign in to lodge a complaint or upvote issues</p>
-          <button id="close-auth" type="button" className="row-start-1 col-start-2 aspect-square flex justify-center items-center" onClick={onClose}>
+          <button id="close-auth" type="button" className="row-start-1 col-start-2 aspect-square flex justify-center items-center" onClick={handleClose}>
             <span className="sr-only">Close Authentication Modal</span>
-            <LuX />
+            <LuX size={14} className="text-on-surface" />
           </button>
         </hgroup>
         <div className="mt-4 grid gap-2 grid-cols-2 text-sm *:truncate">

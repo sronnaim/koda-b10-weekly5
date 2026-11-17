@@ -1,18 +1,17 @@
 import { Outlet } from 'react-router'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import { useState } from 'react'
-import { useBodyData } from './hooks/useBodyData'
+import { useRef, useState } from 'react'
 import AuthModal from './components/AuthModal'
 
 function App() {
   const [authOpen, setAuthOpen] = useState(false)
-  useBodyData('data-auth', authOpen ? 'opened' : 'closed')
+  const authDialogRef = useRef(null)
 
   return (
     <>
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
-      <Header onLogin={() => setAuthOpen(true)} />
+      <AuthModal dialogRef={authDialogRef} />
+      <Header authDialogRef={authDialogRef} />
       <Outlet />
       <Footer />
     </>

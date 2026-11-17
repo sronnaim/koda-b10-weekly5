@@ -30,20 +30,24 @@ function MenuBtn(props) {
 
 /**
  * @typedef {Object} HeaderProps
- * @property {(boolean) => void} onLogin
+ * @property {import('react').RefObject} authDialogRef
  */
 
 /**
  * 
  * @param {HeaderProps} props 
  */
-export default function Header({ onLogin }) {
+export default function Header({ authDialogRef }) {
+  function handleSignIn() {
+    if (authDialogRef.current)
+      authDialogRef.current.showModal()
+  }
   return (
-    <header class="z-50 bg-surface-container [body[data-menu=opened]_&]:h-screen sticky [body[data-menu=opened]_&]:fixed inset-0 border-b border-outline">
-      <div class="p-1 mx-auto h-full flex [body[data-menu=opened]_&]:flex-col items-center [body[data-menu=opened]_&]:justify-center relative md:max-w-272">
+    <header className="z-50 bg-surface-container [body[data-menu=opened]_&]:h-screen sticky [body[data-menu=opened]_&]:fixed inset-0 border-b border-outline">
+      <div className="p-1 mx-auto h-full flex [body[data-menu=opened]_&]:flex-col items-center [body[data-menu=opened]_&]:justify-center relative md:max-w-272">
         <Link
           to="/"
-          class="inline-flex items-center font-serif font-bold text-lg p-2 text-secondary"
+          className="inline-flex items-center font-serif font-bold text-lg p-2 text-secondary"
         >
           <svg
             width="36"
@@ -52,7 +56,7 @@ export default function Header({ onLogin }) {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
-            class="mr-1"
+            className="mr-1"
           >
             <rect
               y="3.34491"
@@ -69,13 +73,13 @@ export default function Header({ onLogin }) {
           </svg>
           WargaReport
         </Link>
-        <div class="grow hidden flex-col font-medium justify-center [body[data-menu=opened]_&]:flex md:flex md:flex-row md:items-center text-sm [&_a]:py-2 [&_a]:px-4 [&_a]:flex [&_a]:items-center [&_a]:text-center [&_a]:gap-2">
-          <nav class="md:grow">
-            <ul class="md:flex md:items-center md:justify-center">
+        <div className="grow hidden flex-col font-medium justify-center [body[data-menu=opened]_&]:flex md:flex md:flex-row md:items-center text-sm [&_a]:py-2 [&_a]:px-4 [&_a]:flex [&_a]:items-center [&_a]:text-center [&_a]:gap-2">
+          <nav className="md:grow">
+            <ul className="md:flex md:items-center md:justify-center">
               <li>
                 <Link
                   to="/feed"
-                  class="flex justify-center py-2 px-3 rounded-full"
+                  className="flex justify-center py-2 px-3 rounded-full"
                 >
                   Live Feed
                 </Link>
@@ -83,7 +87,7 @@ export default function Header({ onLogin }) {
               <li>
                 <Link
                   to="/track"
-                  class="flex justify-center py-2 px-3 rounded-full"
+                  className="flex justify-center py-2 px-3 rounded-full"
                 >
                   Track
                 </Link>
@@ -91,25 +95,25 @@ export default function Header({ onLogin }) {
               <li>
                 <Link
                   to="/help"
-                  class="flex justify-center py-2 px-3 rounded-full"
+                  className="flex justify-center py-2 px-3 rounded-full"
                 >
                   How It Works
                 </Link>
               </li>
             </ul>
           </nav>
-          <div class="md:flex md:items-center">
+          <div className="md:flex md:items-center">
             <button
               to="/login"
-              class="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
-              onClick={onLogin}
+              className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
+              onClick={handleSignIn}
             >
               <LuLogIn />
               Sign In
             </button>
             <Link
               to="/report/new"
-              class="flex justify-center items-center gap-2 bg-primary py-2 px-3 text-on-primary rounded-full"
+              className="flex justify-center items-center gap-2 bg-primary py-2 px-3 text-on-primary rounded-full"
             >
               <LuPlus />
               Report

@@ -2,21 +2,21 @@ import { Link } from "react-router"
 
 export default function Footer() {
   return (
-    <footer class="bg-surface-container border-t border-outline mt-30 px-4 py-13">
-      <div class="max-w-272 container m-auto grid gap-4 md:grid-cols-2">
-        <div class="md:max-w-100 grid gap-6">
-          <Link to="/" class="font-serif text-xl font-bold text-secondary">WargaReport</Link>
-          <p class="text-sm">WargaReport is an independent civic reporting platform for municipal infrastructure
+    <footer className="bg-surface-container border-t border-outline mt-30 px-4 py-13">
+      <div className="max-w-272 container m-auto grid gap-4 md:grid-cols-2">
+        <div className="md:max-w-100 grid gap-6">
+          <Link to="/" className="font-serif text-xl font-bold text-secondary">WargaReport</Link>
+          <p className="text-sm">WargaReport is an independent civic reporting platform for municipal infrastructure
             issues across
             Indonesia. Residents submit evidence, follow SLA countdowns, and track resolution updates from the
             responsible agencies.</p>
-          <p class="text-danger font-medium"><em class="not-italic">Not for life-threatening emergencies, call <Link
+          <p className="text-danger font-medium"><em className="not-italic">Not for life-threatening emergencies, call <Link
             to="tel:112">112</Link>
             (National Emergency Call Center) or BPBD DKI directly.</em></p>
         </div>
 
         <nav
-          class="grid text-sm gap-4 md:grid-cols-3 [&_h3]:font-medium [&_h3]:font-mono [&_h3]:text-primary [&_h3]:mb-2 [&_h3]:uppercase [&_h3]:text-xs [&_ul]:grid [&_ul]:gap-2">
+          className="grid text-sm gap-4 md:grid-cols-3 [&_h3]:font-medium [&_h3]:font-mono [&_h3]:text-primary [&_h3]:mb-2 [&_h3]:uppercase [&_h3]:text-xs [&_ul]:grid [&_ul]:gap-2">
           <div>
             <h3>Citizens</h3>
             <ul>
@@ -63,11 +63,11 @@ export default function Footer() {
             </ul>
           </div>
         </nav>
-        <section class="flex border-t border-outline pt-5 flex-wrap justify-between gap-2 text-xs md:col-span-2">
+        <section className="flex border-t border-outline pt-5 flex-wrap justify-between gap-2 text-xs md:col-span-2">
           <p>
             © 2026 WargaReport. All rights reserved.
           </p>
-          <p class="font-mono">
+          <p className="font-mono">
             UU No. 25/2009 Compliant
           </p>
         </section>
