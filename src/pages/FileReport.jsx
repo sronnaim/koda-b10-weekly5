@@ -1,6 +1,18 @@
 import { LuBuilding, LuCamera, LuChevronDown, LuChevronUp, LuCloudUpload, LuDroplet, LuLock, LuMapPin, LuMic, LuShield, LuSun, LuTrash2, LuTrees, LuTriangleAlert, LuVideo, LuVolume2 } from "react-icons/lu";
+import { useUser } from "../hooks/useUser";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 export default function FileReport() {
+  const { user } = useUser()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!user)
+      navigate('/')
+
+  }, [user, navigate])
+
   return (
     <main className="mx-auto container max-w-272 grow px-4 mt-10 md:mt-16" id="new-report">
       <div className="grid gap-8 md:grid-cols-[auto_1fr]">

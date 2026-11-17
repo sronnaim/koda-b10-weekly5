@@ -1,6 +1,18 @@
 import { LuDownload, LuEye, LuSearch } from "react-icons/lu";
+import { useUser } from "../hooks/useUser";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 export default function Profile() {
+  const { user } = useUser()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!user)
+      navigate('/')
+
+  }, [user, navigate])
+
   return (
     <main className="max-w-272 mt-10 md:mt-16 container grow mx-auto px-4">
       <div>

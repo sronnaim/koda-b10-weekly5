@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
-import { LuLogIn, LuPlus, LuMenu } from 'react-icons/lu'
+import { Link, NavLink } from 'react-router'
+import { LuLogIn, LuPlus, LuMenu, LuBell } from 'react-icons/lu'
 import { useBodyData } from '../hooks/useBodyData'
 import { useUser } from '../hooks/useUser'
 import UserChip from './UserChip'
@@ -107,6 +107,7 @@ export default function Header({ authDialogRef }) {
             </ul>
           </nav>
           <div className="md:flex md:items-center gap-2">
+            {user && <NavLink to='/' className="px-1! relative"><LuBell size={16} /><span className='absolute translate-x-2 -translate-y-2 w-1.5 h-1.5 rounded-full bg-primary flex' /></NavLink>}
             {user ? <UserChip {...user} /> : <button
               to="/login"
               className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
