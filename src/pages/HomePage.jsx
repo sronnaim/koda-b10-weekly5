@@ -14,14 +14,14 @@ export default function HomePage() {
           fixes like a food
           delivery order, and keep authorities accountable.</p>
         <div className="flex flex-wrap items-center gap-2">
-          <a href="/report-an-issue.html"
+          <Link to="/report/new"
             className="font-semibold flex items-center gap-2 py-2 px-4 bg-primary rounded-full text-on-primary">
             <LuCamera />
             Snap a report
             <LuArrowRight />
-          </a>
+          </Link>
 
-          <Link href="/track.html"
+          <Link to="/track"
             className="font-semibold flex items-center gap-2 py-2 px-4 rounded-full bg-surface-container text-secondary border border-outline">
             Track a case
           </Link>
