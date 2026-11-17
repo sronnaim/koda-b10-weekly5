@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "email": "jb@gmail.com",
+    "fullName": "Jude Bellingham",
+    "password": "secret",
+    "role": "citizen",
+    "phone": 628517777777,
+    "nik": null,
+    "createdAt": 1794880876 
+  },
+    {
+    "id": 2,
+    "email": "anies@gmail.com",
+    "fullName": "Anies Baswedan",
+    "password": "secret2",
+    "role": "citizen",
+    "phone": 628517777777,
+    "nik": null,
+    "createdAt": 1794880974 
+  }
+]

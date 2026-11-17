@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { LuMail, LuArrowRight, LuX, LuUser, LuCircleCheckBig } from "react-icons/lu"
 import PasswordField from "./PasswordField"
+import { useForm } from "react-hook-form"
 
 /**
  * @typedef {Object} ModeBtnProps
