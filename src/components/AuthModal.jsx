@@ -8,11 +8,7 @@ import { useUsers } from "../hooks/useUsers"
 import { useNavigate } from "react-router"
 import { LoginSchema } from "../schemas/auth"
 import { useUser } from "../hooks/useUser"
-
-function FieldError({ error }) {
-  if (!error) return null
-  return <span className="text-xs text-danger mt-2 text-2xs">{error.message}</span>
-}
+import FieldError from "./FieldError"
 
 /**
  * @typedef {Object} ModeBtnProps
@@ -46,7 +42,7 @@ function LoginForm() {
     const user = login(data.email, data.password)
 
     if (!user) {
-      setError('password', { message: "Incorrect credentials!" })
+      setError('password', { message: "Incorrect credentials" })
       return
     }
 

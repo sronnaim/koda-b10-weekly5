@@ -24,8 +24,13 @@ function UserChip(user) {
     logout()
     navigate('/')
   }
+
+  function handleBlur(e) {
+    if (!e.currentTarget.contains(e.relatedTarget)) setExpanded(false)
+  }
+
   return (
-    <div className='relative'>
+    <div className='relative' onBlur={handleBlur}>
       <button className='text-2xs flex justify-between gap-2 items-center px-1.5 py-0.5 border border-outline rounded-full' onClick={handleExpand}>
         <span className='w-6 h-6 flex items-center justify-center row-span-2 bg-success-container text-on-success-container border border-on-succes-container/25 rounded-full font-semibold'>{initial}</span>
         <span className='flex flex-col items-start justify-center'>
