@@ -8,6 +8,10 @@ export const useUsers = () => {
     return (users ?? []).find(u => u.email === email.toLowerCase()) ?? null
   }
 
+  function findById(id) {
+    return (users ?? []).find(u => u.id === id) ?? null
+  }
+
   function register({ email, fullName, phone, nik, password }) {
     if (findByEmail(email)) return null
 
@@ -36,5 +40,5 @@ export const useUsers = () => {
     return u && u.password === password ? u : null
   }
 
-  return { register, authenticate, findByEmail }
+  return { register, authenticate, findByEmail, findById }
 }

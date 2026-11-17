@@ -23,7 +23,7 @@ const router = createBrowserRouter([{
       path: '/report/new',
       Component: FileReport,
     }, {
-      path: '/report/:slug',
+      path: '/report/:id',
       Component: Report
     }]
   }, {
