@@ -10,6 +10,7 @@ import Feed from './pages/Feed'
 import Track from './pages/Track'
 import Help from './pages/Help'
 import Report from './pages/Report'
+import Receipt from './pages/Receipt'
 
 const router = createBrowserRouter([{
   Component: AppLayout,
@@ -40,6 +41,9 @@ const router = createBrowserRouter([{
   }, {
     path: 'profile',
     Component: Profile
+  }, {
+    path: '/receipt/:id',
+    Component: Receipt,
   }]
 }])
 
