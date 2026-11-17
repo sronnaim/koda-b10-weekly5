@@ -8,24 +8,25 @@ export const useLocalStorage = (key) => {
     window.dispatchEvent(new Event('storage'))
   }
 
+  function remove() {
+    window.localStorage.removeItem(key)
+    window.dispatchEvent(new Event('storage'))
+  }
+
   useEffect(() => {
     function getData() {
       const data = localStorage.getItem(key)
 
-      if (!data)
-        return null
-
-      setValue(JSON.parse(data))
+      setValue(data ? JSON.parse(data) : null)
     }
 
     window.addEventListener('storage', getData)
-
-    window.dispatchEvent(new Event('storage'))
+    getData()
 
     return () => {
       window.removeEventListener('storage', getData)
     }
   }, [setValue, key])
 
-  return [value, set]
+  return [value, set, remove]
 }

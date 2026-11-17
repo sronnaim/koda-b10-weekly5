@@ -16,12 +16,11 @@ export const UserSchema = object({
 */
 
 export const CreateUserSchema = object({
-  email: string().email((i) => `${i} not a valid Email`).required('Email required'),
+  email: string().email((i) => `${i.value} not a valid Email`).required('Email required'),
   fullName: string().required("Full name required"),
-  password: string().required("Password required"),
+  password: string().required("Password required").min(8),
   phone: string().required("Phone number required"),
-  role: string().oneOf(['citizen', 'admin']).required("Role required"),
-  nik: string().length(16).nullable()
+  nik: string().transform(nik => nik === '' ? null : nik).matches(/^\d{16}$/, 'NIK must be 16 digits').nullable()
 })
 
 /**

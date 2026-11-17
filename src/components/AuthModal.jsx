@@ -1,6 +1,16 @@
 import { LuMail, LuArrowRight, LuX, LuUser, LuCircleCheckBig } from "react-icons/lu"
 import PasswordField from "./PasswordField"
 import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { CreateUserSchema } from "../schemas/users"
+import { useUsers } from "../hooks/useUsers"
+import { useNavigate } from "react-router"
+
+function FieldError({ error }) {
+  if (!error) return null
+  return <span className="text-xs text-danger mt-1 text-2xs">{error.message}</span>
+}
 
 /**
  * @typedef {Object} ModeBtnProps
@@ -15,7 +25,7 @@ import { useState } from "react"
 function ModeBtn({ mode, type, setMode }) {
   const cn = mode === type ? 'bg-primary text-on-primary' : 'bg-surface'
   return (
-    <button className={`text-medium py-4 rounded-full ${cn}`} onClick={() => setMode(type === 'login' ? 'login' : 'reg')}>{mode === 'login' ? 'Sign In Existing Account' : 'Register as Citizen'}</button>
+    <button className={`text-medium grow py-4 rounded-full ${cn}`} onClick={() => setMode(type === 'login' ? 'login' : 'reg')}>{mode === 'login' ? 'Sign In Existing Account' : 'Register as Citizen'}</button>
   )
 }
 
@@ -38,35 +48,64 @@ function LoginForm() {
 }
 
 function RegisterForm() {
+  const { register: registerUser } = useUsers()
+  const navigate = useNavigate()
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(CreateUserSchema) })
+
+  async function onSubmit(data) {
+    const user = registerUser(data)
+
+    if (!user) {
+      setError('email', { message: 'Email is already registered' })
+      return
+    }
+
+    navigate('/feed')
+  }
+
   return (
-    <form className="mt-4 flex flex-col gap-4">
+    <form className="mt-4 flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)} noValidate>
       <label className="font-mono uppercase text-xs flex flex-col font-medium">
         Full Name (Nama Lengkap) *
         <span className="focus-within:shadow-[0_0_0_3px_black] focus-within:shadow-primary/50 focus-within:outline-primary focus-within:outline-1 flex items-center text-on-surface-low gap-2 border px-3 mt-2 border-outline rounded-xl">
           <LuUser />
           <input type="text" autoComplete="name"
-            placeholder="e.g Budi Santoso" name="name" className="py-3 w-full focus:shadow-none! focus:outline-none! focus:border-none!" />
+            placeholder="e.g Budi Santoso" name="name" className="py-3 w-full focus:shadow-none! focus:outline-none! focus:border-none!"
+            {...register('fullName')}
+          />
         </span>
+        <FieldError error={errors.fullName} />
       </label>
       <div className="flex items-center gap-4 w-full flex-wrap">
         <label className="font-mono uppercase text-xs flex flex-col font-medium grow">
           Email Address *
           <input type="email" autoComplete="email" className="border p-3 mt-2 border-outline rounded-xl text-on-surface-low"
-            placeholder="e.g. budi@wargareport.id" name="email" />
+            placeholder="e.g. budi@wargareport.id" name="email" {...register('email')} />
+          <FieldError error={errors.email} />
         </label>
         <label className="font-mono uppercase text-xs flex flex-col font-medium">
           Phone / Whatsapp *
           <input type="tel" autoComplete="tel" className="border p-3 mt-2 border-outline rounded-xl text-on-surface-low"
-            placeholder="+62 851-6666-7777" name="phone" />
+            placeholder="+62 851-6666-7777" name="phone" {...register('phone')} />
+          <FieldError error={errors.phone} />
         </label>
       </div>
       <label className="font-mono uppercase text-xs flex flex-col font-medium">
         NIK
         <input type="text" className="border p-3 mt-2 border-outline rounded-xl text-on-surface-low"
-          placeholder="16 digits for verified resident badge (e.g. 3174...)" name="nik" />
+          placeholder="16 digits for verified resident badge (e.g. 3174...)" name="nik" {...register('nik')} />
+        <FieldError error={errors.nik} />
       </label>
       <PasswordField type="password" autoComplete="new-password"
-        placeholder="Create a password" name="password" label="Password *" />
+        placeholder="Create a password" name="password" label="Password *" {...register('password')}>
+        <FieldError error={errors.password} />
+      </PasswordField>
       <button type="submit" className="mb-6 flex items-center w-full justify-center bg-primary text-on-primary text-xs rounded-full gap-2 p-2">
         <LuCircleCheckBig /> Create Account & Continue</button>
     </form>
@@ -100,7 +139,7 @@ function AuthModal({ dialogRef }) {
             <LuX size={14} className="text-on-surface" />
           </button>
         </hgroup>
-        <div className="mt-4 grid gap-2 grid-cols-2 text-sm *:truncate">
+        <div className="mt-4 gap-2 flex flex-wrap text-sm *:truncate">
           <ModeBtn mode={mode} type="login" setMode={setMode} />
           <ModeBtn mode={mode} type="reg" setMode={setMode} />
         </div>
