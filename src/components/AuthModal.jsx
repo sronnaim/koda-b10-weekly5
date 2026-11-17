@@ -6,10 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { CreateUserSchema } from "../schemas/users"
 import { useUsers } from "../hooks/useUsers"
 import { useNavigate } from "react-router"
+import { LoginSchema } from "../schemas/auth"
+import { useUser } from "../hooks/useUser"
 
 function FieldError({ error }) {
   if (!error) return null
-  return <span className="text-xs text-danger mt-1 text-2xs">{error.message}</span>
+  return <span className="text-xs text-danger mt-2 text-2xs">{error.message}</span>
 }
 
 /**
@@ -30,18 +32,42 @@ function ModeBtn({ mode, type, setMode }) {
 }
 
 function LoginForm() {
+  const { login } = useUser()
+  const navigate = useNavigate()
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(LoginSchema) })
+
+  function onSubmit(data) {
+    const user = login(data.email, data.password)
+
+    if (!user) {
+      setError('password', { message: "Incorrect credentials!" })
+      return
+    }
+
+    navigate('/profile')
+  }
+
   return (
-    <form className="mt-4 flex flex-col gap-4">
+    <form className="mt-4 flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)} noValidate>
       <label className="font-mono uppercase text-xs flex flex-col font-medium">
         Email Address
         <span className="focus-within:shadow-[0_0_0_3px_black] focus-within:shadow-primary/50 focus-within:outline-primary focus-within:outline-1 flex items-center text-on-surface-low gap-2 border px-3 mt-2 border-outline rounded-xl">
           <LuMail />
           <input type="email" autoComplete="email" name="email"
-            placeholder="Enter your Email" className="py-3 w-full focus:shadow-none! focus:outline-none! focus:border-none!" />
+            placeholder="Enter your Email" className="py-3 w-full focus:shadow-none! focus:outline-none! focus:border-none!" {...register('email')} />
         </span>
+        <FieldError error={errors.email} />
       </label>
       <PasswordField type="password" autoComplete="current-password" name="password"
-        placeholder="Enter your password" label="Password" />
+        placeholder="Enter your password" label="Password" {...register('password')}>
+        <FieldError error={errors.password} />
+      </PasswordField>
       <button type="submit" className="mb-6 mt-4 flex items-center w-full justify-center bg-primary text-on-primary text-xs rounded-full gap-2 p-2">Sign In <LuArrowRight /></button>
     </form>
   )

@@ -1,12 +1,16 @@
-import { Outlet } from 'react-router'
+import { Outlet, useLocation } from 'react-router'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import { useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import AuthModal from './components/AuthModal'
 
 function App() {
-  const [authOpen, setAuthOpen] = useState(false)
   const authDialogRef = useRef(null)
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    authDialogRef.current?.close()
+  }, [pathname])
 
   return (
     <>

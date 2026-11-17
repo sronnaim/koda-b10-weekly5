@@ -1,4 +1,5 @@
 import { useLocalStorage } from "./useLocalStorage"
+import { useUsers } from "./useUsers"
 
 /**
  * @typedef {Omit<import("../schemas/users").User, 'password'>} SessionUser
@@ -6,13 +7,23 @@ import { useLocalStorage } from "./useLocalStorage"
 
 export const useUser = () => {
   const [user, setUser, removeUser] = useLocalStorage('user')
+  const { authenticate } = useUsers()
 
   /**
-   * @param {SessionUser & { password?: string }} data
+   * @param {string} email
+   * @param {string} pw
+   * 
    */
-  function login(data) {
-    const { password, ...rest } = data
+  function login(email, pw) {
+    const user = authenticate(email, pw)
+
+    if (!user)
+      return null
+
+    const { password, ...rest } = user
     setUser(rest)
+
+    return rest
   }
 
   function logout() {

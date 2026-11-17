@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { LuLogIn, LuPlus, LuMenu } from 'react-icons/lu'
 import { useBodyData } from '../hooks/useBodyData'
+import { useUser } from '../hooks/useUser'
+import UserChip from './UserChip'
 
 /**
  * @param {React.ButtonHTMLAttributes<HTMLButtonElement>} props
@@ -38,6 +40,8 @@ function MenuBtn(props) {
  * @param {HeaderProps} props 
  */
 export default function Header({ authDialogRef }) {
+  const { user } = useUser()
+
   function handleSignIn() {
     if (authDialogRef.current)
       authDialogRef.current.showModal()
@@ -102,15 +106,15 @@ export default function Header({ authDialogRef }) {
               </li>
             </ul>
           </nav>
-          <div className="md:flex md:items-center">
-            <button
+          <div className="md:flex md:items-center gap-2">
+            {user ? <UserChip {...user} /> : <button
               to="/login"
               className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
               onClick={handleSignIn}
             >
               <LuLogIn />
               Sign In
-            </button>
+            </button>}
             <Link
               to="/report/new"
               className="flex justify-center items-center gap-2 bg-primary py-2 px-3 text-on-primary rounded-full"

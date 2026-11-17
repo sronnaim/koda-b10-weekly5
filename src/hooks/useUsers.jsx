@@ -25,6 +25,12 @@ export const useUsers = () => {
     return newUser
   }
 
+  /**
+   * 
+   * @param {string} email 
+   * @param {string} password 
+   * @returns {import("../schemas/users").User}
+   */
   function authenticate(email, password) {
     const u = findByEmail(email)
     return u && u.password === password ? u : null
