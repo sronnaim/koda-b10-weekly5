@@ -9,6 +9,7 @@ import { LuShield } from "react-icons/lu";
 import FileReportLocation from "../components/FileReportLocation";
 import FileReportEvidence from "../components/FileReportEvidence";
 import FileReportDetails from "../components/FileReportDetails";
+import { useReports } from "../hooks/useReports";
 
 const STEPS = [
   { title: "What needs fixing?", desc: "Select the municipal service category that best matches the issue observed.", fields: ['cat'], Component: FileReportCategory },
@@ -20,12 +21,11 @@ const STEPS = [
 export default function FileReport() {
   const { user } = useUser()
   const navigate = useNavigate()
-
   const [step, setStep] = useState(0)
+  const { create } = useReports()
 
   const { Component, fields, title, desc } = STEPS[step]
   const isLast = step === STEPS.length - 1
-
 
   async function next() {
     const valid = await methods.trigger(fields)
@@ -45,7 +45,12 @@ export default function FileReport() {
 
 
   function onSubmit(data) {
-    console.log(data)
+    if (!user.id)
+      return
+
+    const created = create(data, user.id)
+
+    navigate(`/receipt/${created.id}`)
   }
 
   return (
