@@ -1,7 +1,11 @@
 import { Link } from 'react-router'
 import { LuArrowRight, LuCamera, LuMapPin, LuSearch, LuThumbsUp } from 'react-icons/lu'
+import { useReports } from '../hooks/useReports'
+import HomeFeed from '../components/HomeFeed'
 
 export default function HomePage() {
+  const { reports } = useReports()
+
   return (
     <main className="max-w-272 container grow mx-auto px-4">
       <section className="flex flex-col gap-6">
@@ -81,173 +85,7 @@ export default function HomePage() {
           </li>
         </ol>
       </section>
-      <section className="mt-8 pt-6 border-t border-outline">
-        <div className="flex items-end flex-wrap gap-2">
-          <div className="grow">
-            <h2 className="text-xl font-serif text-secondary font-semibold">Recent Community Reports</h2>
-            <p className="text-xs">Verified reports lodged in Jakarta and surrounding regions</p>
-          </div>
-          <a href="/feed" className="text-xs flex flex-col font-semibold text-primary md:translate-y-4">
-            View live feed →
-          </a>
-        </div>
-        <ol
-          className="mt-6 grid md:grid-cols-2 gap-4 [&_li]:grid [&_li]:gap-2 [&_li]:lg:grid-cols-[auto_1fr] [&_li]:p-4 [&_li]:rounded-2xl [&_li]:border [&_li]:border-outline [&_li]:max-w-96 [&_li]:lg:max-w-none [&_li]:mx-auto [&_li]:bg-surface-container [&_li>:first-child,&_li_img]:aspect-square [&_li>:first-child]:rounded-2xl [&_li>:first-child]:overflow-hidden [&_li>:first-child]:lg:max-w-24 [&_li_img]:w-full [&_li_img]:object-cover">
-          <li>
-            <div>
-              <img src="/assets/r1.jpg" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="inline-flex items-center text-xs  border px-2 font-semibold gap-1 py-1 bg-warning-container rounded-full text-on-warning-container border-on-warning-container/25">
-                  <LuSearch />
-                  In review
-                </span>
-                <span className="font-mono text-xs">
-                  CMP-2026-8841
-                </span>
-              </div>
-
-              <h3 className="font-serif font-semibold text-sm text-secondary">
-                PAM clean drinking water pipeline burst flooding sidewalk in front of Cipete Raya MRT
-              </h3>
-              <p className="flex text-xs text-on-surface-low items-center">
-                <LuMapPin />
-                Jl. Fatmawati Raya No. 42 (depan Stasiun MRT Cipete Raya)
-              </p>
-
-              <div className="flex items-center font-medium justify-between text-xs text-primary">
-                <button
-                  className="font-mono flex items-center gap-1 border border-outline px-2 py-1 rounded-full">
-                  <LuThumbsUp />
-                  <span className="sr-only">Give a like</span>
-                  <span className="sr-only">Liked by 148 citizens</span>
-                  <span aria-hidden="true">148</span>
-                </button>
-                <Link href="/report/x">
-                  Inspect →
-                </Link>
-              </div>
-            </div>
-          </li>
-
-          <li>
-            <div>
-              <img src="/assets/r1.jpg" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="inline-flex items-center text-xs  border px-2 font-semibold gap-1 py-1 bg-warning-container rounded-full text-on-warning-container border-on-warning-container/25">
-                  <LuSearch />
-                  In review
-                </span>
-                <span className="font-mono text-xs">
-                  CMP-2026-8841
-                </span>
-              </div>
-
-              <h3 className="font-serif font-semibold text-sm text-secondary">
-                PAM clean drinking water pipeline burst flooding sidewalk in front of Cipete Raya MRT
-              </h3>
-              <p className="flex text-xs text-on-surface-low items-center">
-                <LuMapPin />
-                Jl. Fatmawati Raya No. 42 (depan Stasiun MRT Cipete Raya)
-              </p>
-
-              <div className="flex items-center font-medium justify-between text-xs text-primary">
-                <button
-                  className="font-mono flex items-center gap-1 border border-outline px-2 py-1 rounded-full">
-                  <LuThumbsUp />
-                  <span className="sr-only">Give a like</span>
-                  <span className="sr-only">Liked by 148 citizens</span>
-                  <span aria-hidden="true">148</span>
-                </button>
-                <Link href="/report/x">
-                  Inspect →
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div>
-              <img src="/assets/r1.jpg" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="inline-flex items-center text-xs  border px-2 font-semibold gap-1 py-1 bg-warning-container rounded-full text-on-warning-container border-on-warning-container/25">
-                  <LuSearch />
-                  In review
-                </span>
-                <span className="font-mono text-xs">
-                  CMP-2026-8841
-                </span>
-              </div>
-
-              <h3 className="font-serif font-semibold text-sm text-secondary">
-                PAM clean drinking water pipeline burst flooding sidewalk in front of Cipete Raya MRT
-              </h3>
-              <p className="flex text-xs text-on-surface-low items-center">
-                <LuMapPin />
-                Jl. Fatmawati Raya No. 42 (depan Stasiun MRT Cipete Raya)
-              </p>
-
-              <div className="flex items-center font-medium justify-between text-xs text-primary">
-                <button
-                  className="font-mono flex items-center gap-1 border border-outline px-2 py-1 rounded-full">
-                  <LuThumbsUp />
-                  <span className="sr-only">Give a like</span>
-                  <span className="sr-only">Liked by 148 citizens</span>
-                  <span aria-hidden="true">148</span>
-                </button>
-                <Link href="/report/x">
-                  Inspect →
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div>
-              <img src="/assets/r1.jpg" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="inline-flex items-center text-xs  border px-2 font-semibold gap-1 py-1 bg-warning-container rounded-full text-on-warning-container border-on-warning-container/25">
-                  <LuSearch />
-                  In review
-                </span>
-                <span className="font-mono text-xs">
-                  CMP-2026-8841
-                </span>
-              </div>
-
-              <h3 className="font-serif font-semibold text-sm text-secondary">
-                PAM clean drinking water pipeline burst flooding sidewalk in front of Cipete Raya MRT
-              </h3>
-              <p className="flex text-xs text-on-surface-low items-center">
-                <LuMapPin />
-                Jl. Fatmawati Raya No. 42 (depan Stasiun MRT Cipete Raya)
-              </p>
-
-              <div className="flex items-center font-medium justify-between text-xs text-primary">
-                <button
-                  className="font-mono flex items-center gap-1 border border-outline px-2 py-1 rounded-full">
-                  <LuThumbsUp />
-                  <span className="sr-only">Give a like</span>
-                  <span className="sr-only">Liked by 148 citizens</span>
-                  <span aria-hidden="true">148</span>
-                </button>
-                <Link href="/report/x">
-                  Inspect →
-                </Link>
-              </div>
-            </div>
-          </li>
-        </ol>
-      </section>
+      <HomeFeed reports={reports} />
     </main>
   )
 }

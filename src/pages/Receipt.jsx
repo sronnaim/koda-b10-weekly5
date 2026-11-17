@@ -13,7 +13,6 @@ function Receipt() {
   const { getById } = useReports()
   const r = getById(id)
 
-
   if (!r)
     return <></>
   else
