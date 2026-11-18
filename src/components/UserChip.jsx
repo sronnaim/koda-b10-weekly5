@@ -22,6 +22,7 @@ function UserChip(user) {
 
   function handleLogout() {
     logout()
+    window.alert("You've been logged out!")
     navigate('/')
   }
 
