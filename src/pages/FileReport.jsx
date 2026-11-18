@@ -98,7 +98,7 @@ export default function FileReport() {
               Citata). Resolution timestamps are tracked
               publicly.</p>
           </div>
-          <a href="/feed.html" className="text-sm font-semibold text-primary">Cancel and return to feed</a>
+          <Link to="/feed" className="text-sm font-semibold text-primary">Cancel and return to feed</Link>
         </section>
         <section className="bg-surface-container p-8 rounded-2xl border border-outline">
           <div>

@@ -47,42 +47,42 @@ export default function Feed() {
               className="flex gap-2 flex-wrap [&_label]:px-4 [&_label]:py-2 [&_label]:flex [&_label]:items-center [&_label_input]:hidden [&_label]:gap-2 [&_label]:font-medium [&_label]:text-xs [&_label]:border [&_label]:border-outline [&_label]:rounded-full [&_label]:bg-surface-container [&_label:has(input:checked)]:bg-primary [&_label:has(input:checked)]:text-on-primary">
               <legend className="sr-only">Category</legend>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="all" defaultChecked />
                 <span>All Issues (6)</span>
               </label>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="cat-1" />
                 <LuTriangleAlert />
 
                 <span>Roads & Transit</span>
               </label>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="cat-2" />
                 <LuDroplets />
                 <span>Water & Sewage</span>
               </label>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="cat-3" />
                 <LuSun />
                 <span>Street Lighting</span>
               </label>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="cat-4" />
                 <LuTrash2 />
                 <span>Sanitation & Waste</span>
               </label>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="cat-5" />
                 <LuTrees />
                 <span>Public Parks & Trees</span>
               </label>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="cat-6" />
                 <LuVolume2 />
                 <span>Noise & Disturbance</span>
               </label>
               <label>
-                <input type="radio" name="cat" />
+                <input type="radio" name="cat" value="cat-7" />
                 <LuBuilding />
                 <span>Building & Zoning</span>
               </label>
@@ -95,35 +95,35 @@ export default function Feed() {
                   Status:
                 </legend>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="all" defaultChecked />
                   <span>All</span>
                 </label>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="submitted" />
                   <span>Submitted</span>
                 </label>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="received" />
                   <span>Received</span>
                 </label>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="in-review" />
                   <span>In review</span>
                 </label>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="assigned" />
                   <span>Assigned</span>
                 </label>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="awaiting-info" />
                   <span>Awaiting your info</span>
                 </label>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="resolved" />
                   <span>Resolved</span>
                 </label>
                 <label>
-                  <input type="radio" name="status" />
+                  <input type="radio" name="status" value="closed" />
                   <span>Closed</span>
                 </label>
               </fieldset>
@@ -131,13 +131,13 @@ export default function Feed() {
               <div
                 className="flex items-center text-xs gap-2 px-3 py-1 rounded-full bg-surface-container border border-outline">
                 <input type="checkbox" name="proof" id="proof" />
-                <label for="proof">With photos/proof only</label>
+                <label htmlFor="proof">With photos/proof only</label>
               </div>
             </div>
           </form>
         </search>
         <ol className="bg-surface-container rounded-2xl overflow-hidden border border-outline mt-6 grid">
-          {reports && reports.length > 0 && reports.map(r => <FeedListItem report={r} />)}
+          {reports && reports.length > 0 && reports.map(r => <FeedListItem key={`r-${r.id}`} report={r} />)}
         </ol>
       </div>
     </main >

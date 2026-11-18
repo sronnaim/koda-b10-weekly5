@@ -13,6 +13,10 @@ function Receipt() {
   const { getById } = useReports()
   const r = getById(id)
 
+  function handlePrint() {
+    window.print()
+  }
+
   if (!r)
     return <></>
   else
@@ -55,7 +59,7 @@ function Receipt() {
               <Link to={`/report/${r.id}`} className="bg-primary text-on-primary px-5 py-2.5 rounded-full">
                 Track report status →
               </Link>
-              <button className="inline-flex text-secondary font-semibold items-center gap-2 px-5 py-2.5 rounded-full border border-outline">
+              <button className="inline-flex text-secondary font-semibold items-center gap-2 px-5 py-2.5 rounded-full border border-outline" onClick={handlePrint}>
                 <LuPrinter />
                 Print receipt
               </button>
