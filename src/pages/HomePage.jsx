@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { LuArrowRight, LuCamera, LuMapPin, LuSearch, LuThumbsUp } from 'react-icons/lu'
+import { LuArrowRight, LuCamera } from 'react-icons/lu'
 import { useReports } from '../hooks/useReports'
 import HomeFeed from '../components/HomeFeed'
 

@@ -1,4 +1,3 @@
-// useUsers.js
 import { useLocalStorage } from "./useLocalStorage"
 
 export const useUsers = () => {

@@ -81,28 +81,28 @@ export default function Header({ authDialogRef }) {
           <nav className="md:grow">
             <ul className="md:flex md:items-center md:justify-center">
               <li>
-                <Link
+                <NavLink
                   to="/feed"
-                  className="flex justify-center py-2 px-3 rounded-full"
+                  className={({ isActive }) => isActive ? 'bg-primary text-on-primary flex justify-center py-2 px-3 rounded-full transition-colors duration-500' : 'flex justify-center py-2 px-3 rounded-full transition-colors duration-500'}
                 >
                   Live Feed
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/track"
-                  className="flex justify-center py-2 px-3 rounded-full"
+                  className={({ isActive }) => isActive ? 'bg-primary text-on-primary flex justify-center py-2 px-3 rounded-full transition-colors duration-500' : 'flex justify-center py-2 px-3 rounded-full transition-colors duration-500'}
                 >
                   Track
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/help"
-                  className="flex justify-center py-2 px-3 rounded-full"
+                  className={({ isActive }) => isActive ? 'bg-primary text-on-primary flex justify-center py-2 px-3 rounded-full transition-colors duration-500' : 'flex justify-center py-2 px-3 rounded-full transition-colors duration-500'}
                 >
                   How It Works
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
