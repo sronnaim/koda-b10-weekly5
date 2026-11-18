@@ -8,12 +8,24 @@ import { CATEGORIES } from '../schemas/report'
 
 function Report() {
   const { id } = useParams()
-  const r = useReports().getById(id)
-  const author = useUsers().findById(r.authorId)
-  const d = moment(r.createdAt)
+  const { getById } = useReports()
+  const { findById } = useUsers()
+
+  const r = getById(id)
+  console.log(r)
+  const author = r ? findById(r.authorId) : null
+  const d = r ? moment(r.createdAt) : null
 
   if (!r)
-    return
+    return (
+      <main className="mx-auto max-w-272 px-4 mt-16 text-center">
+        <h1 className="font-serif text-xl text-secondary font-semibold">Report not found</h1>
+        <p className="text-sm text-on-surface-low mt-2">
+          It may have been removed, or the link is wrong.
+        </p>
+        <Link to="/feed" className="inline-block mt-4 text-primary text-sm">Back to live feed</Link>
+      </main>
+    )
   else
     return (
       <main className="max-w-272 mx-auto px-4">
