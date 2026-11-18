@@ -1,8 +1,22 @@
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm } from "react-hook-form"
 import { LuArrowRight, LuSearch } from "react-icons/lu"
 import { VscQuestion } from "react-icons/vsc"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
+import { object, string } from "yup"
+import FieldError from "../components/FieldError"
+
+const searchSchema = object({
+  q: string().matches(/^CMP-20[2-9][0-9]-\d{5}$/, 'Invalid Report ID').required('Report ID required')
+})
 
 export default function Track() {
+  const navigate = useNavigate()
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(searchSchema), mode: "onBlur" })
+
+  function onSubmit(data) {
+    navigate(`/report/${data.q}`)
+  }
   return (
     <main className="mx-auto container max-w-272 grow px-4 mt-10 md:mt-16">
       <div className="grid md:grid-cols-[auto_1fr] gap-4 md:gap-8 mx-auto items-start">
@@ -19,11 +33,12 @@ export default function Track() {
               and official replies.
             </p>
           </div>
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <label className="font-mono uppercase text-xs flex flex-col font-medium">
               Complaint Reference ID *
               <input type="text" className="border p-3 mt-2 border-outline rounded-xl"
-                placeholder="e.g. CMP-2026-8841" />
+                placeholder="e.g. CMP-2026-8841" name="q" {...register('q')} />
+              <FieldError error={errors.q} />
             </label>
             <label className="font-mono uppercase text-xs flex flex-col font-medium">
               Email address or phone (optional verification)

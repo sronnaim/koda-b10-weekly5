@@ -18,7 +18,7 @@ function Report() {
 
   if (!r)
     return (
-      <main className="mx-auto max-w-272 px-4 mt-16 text-center">
+      <main className="mx-auto max-w-272 grow px-4 mt-16 text-center">
         <h1 className="font-serif text-xl text-secondary font-semibold">Report not found</h1>
         <p className="text-sm text-on-surface-low mt-2">
           It may have been removed, or the link is wrong.
