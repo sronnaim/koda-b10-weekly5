@@ -1,5 +1,4 @@
 import { LuArchive, LuCircleAlert, LuCircleCheck, LuClock, LuInbox, LuPhoneCall, LuSearch, LuUserCheck } from 'react-icons/lu'
-import { Link } from 'react-router'
 
 export default function Help() {
   return (
@@ -237,8 +236,8 @@ export default function Help() {
                   active fire, medical crisis, or immediate hazard to life:</p>
                 <div
                   className="flex text-2xs flex-wrap gap-2 *:bg-surface-container *:rounded-full *:font-mono *:px-3 *:border *:border-on-danger-container/25 *:py-2">
-                  <Link href="tel:112">Call 112 (National Emergency)</Link>
-                  <Link href="tel:113">Call 113 (Fire Dispatch)</Link>
+                  <a href="tel:112">Call 112 (National Emergency)</a>
+                  <a href="tel:113">Call 113 (Fire Dispatch)</a>
                 </div>
               </section>
             </aside>
