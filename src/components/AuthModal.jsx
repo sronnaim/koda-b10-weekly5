@@ -46,6 +46,7 @@ function LoginForm() {
       return
     }
 
+    window.alert('Logged in successfully!')
     navigate('/profile')
   }
 
@@ -88,6 +89,7 @@ function RegisterForm() {
       return
     }
 
+    window.alert('Account created successfully!')
     navigate('/feed')
   }
 
