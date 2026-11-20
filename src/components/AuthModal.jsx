@@ -8,7 +8,7 @@ import { useUsers } from "../hooks/useUsers"
 import { useNavigate } from "react-router"
 import { LoginSchema } from "../schemas/auth"
 import { useUser } from "../hooks/useUser"
-import FieldError from "./FieldError"
+import FieldError from "./ui/FieldError"
 
 function LoginForm() {
   const { login } = useUser()

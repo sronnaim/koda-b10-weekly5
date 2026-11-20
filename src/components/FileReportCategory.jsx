@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form"
 import { LuBuilding, LuDroplet, LuSun, LuTrash2, LuTrees, LuTriangleAlert, LuVolume2 } from "react-icons/lu"
-import FieldError from "./FieldError"
+import FieldError from "./ui/FieldError"
 
 function FileReportCategory() {
   const { register, formState: { errors } } = useFormContext()

@@ -1,4 +1,26 @@
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm } from "react-hook-form"
+import { useOutletContext } from "react-router"
+import { UpdateProfileSchema } from "../../schemas/users"
+import FieldError from "../ui/FieldError"
+import { useUsers } from "../../hooks/useUsers"
+
 function MyProfile() {
+  const user = useOutletContext()
+  const { updateUser } = useUsers()
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    mode: 'onSubmit',
+    resolver: yupResolver(UpdateProfileSchema)
+  })
+
+  function onSubmit(data) {
+    const id = updateUser(user.id, data)
+
+    if (id)
+      window.alert('Updated')
+  }
+
   return (
     <div className="bg-surface-container rounded-2xl px-8 py-6 border border-outline md:max-w-160 mt-4"
       id="profile">
@@ -6,7 +28,7 @@ function MyProfile() {
         <h2 className="text-lg font-serif font-semibold text-secondary">Filer Identity & Preferences</h2>
         <p className="text-xs">Used to pre-fill future complaint forms and verify status inquiries.</p>
       </hgroup>
-      <form action="/myprofile.html" className="flex flex-col gap-4 mt-4">
+      <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit(onSubmit)} noValidate>
         <div>
           <label className="flex flex-wrap gap-4 items-center cursor-pointer">
             <span
@@ -20,26 +42,38 @@ function MyProfile() {
             </span>
           </label>
         </div>
-        <label className="border-t border-outline py-4 font-mono uppercase text-xs flex flex-col font-medium">
-          Full Legal Name
-          <input type="text" name="fullname" autocomplete="name" value="Fahrul Septiana"
-            className="border p-3 mt-2 border-outline rounded-xl" />
-        </label>
-        <label className="font-mono uppercase text-xs flex flex-col font-medium">
-          Primary Notification Email
-          <input type="email" name="email" autocomplete="email" value="fahrul@wargareport.id"
-            className="border p-3 mt-2 border-outline rounded-xl" />
-        </label>
-        <label className="font-mono uppercase text-xs flex flex-col font-medium">
-          SMS Contact Number
-          <input type="tel" name="phone" autocomplete="tel-local" value="+62 812-9842-1054"
-            className="border p-3 mt-2 border-outline rounded-xl" />
-        </label>
-        <label className="font-mono uppercase text-xs flex flex-col font-medium">
-          NIK
-          <input type="text" name="nik" value="3174051809900004"
-            className="border p-3 mt-2 border-outline rounded-xl" />
-        </label>
+        <div>
+          <label className="border-t border-outline font-mono pt-4 uppercase text-xs flex flex-col font-medium">
+            Full Legal Name
+            <input type="text" name="fullName" autoComplete="name" defaultValue={user.fullName}
+              className="border p-3 mt-2 border-outline rounded-xl" {...register('fullName')} />
+          </label>
+          <FieldError error={errors.fullName} />
+        </div>
+        <div>
+          <label className="font-mono uppercase text-xs flex flex-col font-medium">
+            Primary Notification Email
+            <input type="email" name="email" autoComplete="email" defaultValue={user.email}
+              className="border p-3 mt-2 border-outline rounded-xl" {...register('email')} />
+          </label>
+          <FieldError error={errors.email} />
+        </div>
+        <div>
+          <label className="font-mono uppercase text-xs flex flex-col font-medium">
+            SMS Contact Number
+            <input type="tel" name="phone" autoComplete="tel-local" defaultValue={user.phone}
+              className="border p-3 mt-2 border-outline rounded-xl" {...register('phone')} />
+          </label>
+          <FieldError error={errors.phone} />
+        </div>
+        <div>
+          <label className="font-mono uppercase text-xs flex flex-col font-medium">
+            NIK
+            <input type="text" name="nik" defaultValue={user.nik}
+              className="border p-3 mt-2 border-outline rounded-xl" {...register('nik')} />
+          </label>
+          <FieldError error={errors.nik} />
+        </div>
         <button type="submit"
           className="w-fit font-semibold px-4 py-2 bg-primary text-on-primary rounded-full">Save
           profile

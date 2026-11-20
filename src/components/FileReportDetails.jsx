@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 import { LuLock } from 'react-icons/lu'
-import FieldError from './FieldError'
+import FieldError from './ui/FieldError'
 import { useUser } from '../hooks/useUser'
 
 function FileReportDetails() {

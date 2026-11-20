@@ -4,7 +4,7 @@ import { LuArrowRight, LuSearch } from "react-icons/lu"
 import { VscQuestion } from "react-icons/vsc"
 import { Link, useNavigate } from "react-router"
 import { object, string } from "yup"
-import FieldError from "../components/FieldError"
+import FieldError from "../components/ui/FieldError"
 
 const searchSchema = object({
   q: string().matches(/^CMP-20[2-9][0-9]-\d{5}$/, 'Invalid Report ID').required('Report ID required')

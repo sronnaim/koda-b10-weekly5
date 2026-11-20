@@ -3,6 +3,24 @@ import { useLocalStorage } from "./useLocalStorage"
 export const useUsers = () => {
   const [users, setUsers] = useLocalStorage('users')
 
+  function updateUser(id, update) {
+    const foundUser = findById(id)
+
+    if (!foundUser)
+      return null
+
+    const updatedUsers = users.map(user => {
+      if (user.id === id)
+        return { ...user, ...update, id }
+
+      return user
+    })
+
+    setUsers(updatedUsers)
+
+    return id
+  }
+
   function findByEmail(email) {
     return (users ?? []).find(u => u.email === email.toLowerCase()) ?? null
   }
@@ -39,5 +57,5 @@ export const useUsers = () => {
     return u && u.password === password ? u : null
   }
 
-  return { register, authenticate, findByEmail, findById }
+  return { register, authenticate, findByEmail, findById, updateUser }
 }

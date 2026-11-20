@@ -29,3 +29,5 @@ export const CreateUserSchema = object({
 /**
  * @typedef {import("yup").InferType<typeof CreateUserSchema>} CreateUser
  */
+
+export const UpdateProfileSchema = CreateUserSchema.pick(['email', 'fullName', 'nik', 'phone'])

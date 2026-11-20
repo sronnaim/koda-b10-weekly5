@@ -1,4 +1,3 @@
-import { LuSearch } from "react-icons/lu"
 import { useReports } from "../../hooks/useReports"
 import { useOutletContext } from "react-router"
 import StatusBadge from "../ui/StatusBadge"
