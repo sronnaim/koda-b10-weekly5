@@ -1,16 +1,21 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 import './index.css'
 import AppLayout from './App'
 import HomePage from './pages/HomePage'
 import FileReport from './pages/FileReport'
-import Profile from './pages/Profile'
 import Feed from './pages/Feed'
 import Track from './pages/Track'
 import Help from './pages/Help'
 import Report from './pages/Report'
 import Receipt from './pages/Receipt'
+import AccountLayout from './layouts/Account'
+import MyComplaints from './components/account/MyComplaints'
+import MyProfile from './components/account/MyProfile'
+import MyAlerts from './components/account/MyAlerts'
+import MyPrivacy from './components/account/MyPrivacy'
+import MySecurity from './components/account/MySecurity'
 
 const router = createBrowserRouter([{
   Component: AppLayout,
@@ -27,8 +32,24 @@ const router = createBrowserRouter([{
       Component: Report
     }]
   }, {
-    path: 'profile',
-    Component: Profile
+    path: 'account',
+    Component: AccountLayout,
+    children: [{
+      path: 'complaints',
+      Component: MyComplaints,
+    }, { index: true, element: <Navigate to="profile" replace /> }, {
+      path: 'profile',
+      Component: MyProfile,
+    }, {
+      path: 'alerts',
+      Component: MyAlerts
+    }, {
+      path: 'privacy',
+      Component: MyPrivacy
+    }, {
+      path: 'security',
+      Component: MySecurity
+    }]
   }, {
     path: 'feed',
     Component: Feed
@@ -38,9 +59,6 @@ const router = createBrowserRouter([{
   }, {
     path: 'help',
     Component: Help
-  }, {
-    path: 'profile',
-    Component: Profile
   }, {
     path: '/receipt/:id',
     Component: Receipt,

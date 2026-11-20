@@ -30,7 +30,7 @@ function LoginForm() {
     }
 
     window.alert('Logged in successfully!')
-    navigate('/profile')
+    navigate('/account')
   }
 
   return (
