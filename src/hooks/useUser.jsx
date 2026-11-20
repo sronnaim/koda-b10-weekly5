@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from "react"
 import { useLocalStorage } from "./useLocalStorage"
 import { useUsers } from "./useUsers"
 
@@ -7,7 +8,7 @@ import { useUsers } from "./useUsers"
 
 export const useUser = () => {
   const [user, setUser, removeUser] = useLocalStorage('user')
-  const { authenticate } = useUsers()
+  const { authenticate, findById } = useUsers()
 
   /**
    * @param {string} email
@@ -26,9 +27,28 @@ export const useUser = () => {
     return rest
   }
 
-  function logout() {
+  const logout = useCallback(() => {
     removeUser()
-  }
+  }, [removeUser])
+
+
+  useEffect(() => {
+    if (!user)
+      return
+
+    const foundUser = findById(user.id)
+
+    if (!foundUser) {
+      logout()
+      return
+    }
+
+    const { password, ...rest } = foundUser
+
+    if (JSON.stringify(rest) !== JSON.stringify(user)) {
+      setUser(rest)
+    }
+  }, [logout, findById, user, setUser])
 
   return {
     user,

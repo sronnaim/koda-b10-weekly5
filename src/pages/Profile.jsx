@@ -63,7 +63,6 @@ export default function Profile() {
             </label>
             <label
               className="font-mono uppercase text-xs flex flex-col font-medium [&_input:focus]:shadow-none [&_input:focus]:border-none [&_input:focus]:rounded-none">
-
               New Password
               <span className="border flex items-center p-3 mt-2 border-outline rounded-xl">
                 <input type="password" autocomplete="new-password" name="new"

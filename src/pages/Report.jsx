@@ -146,7 +146,7 @@ function Report() {
                     Submitted
                   </span>
                 </hgroup>
-                <span className="flex text-xs flex-wrap font-semibold gap-1">{author.fullName}<time
+                <span className="flex text-xs flex-wrap font-semibold gap-1">{author ? author.fullName : "Anon"}<time
                   className="font-mono text-on-surface-low font-normal"
                   datetime={d.format()}>· {d.format('MMM D, HH:mm A')}</time></span>
                 <span className="text-xs my-2 border border-outline p-4 rounded-2xl">Citizen attached evidences.</span>
@@ -230,7 +230,7 @@ function Report() {
                 </li>
                 <li>
                   <h3>Reported By</h3>
-                  <p>{author.fullName}</p>
+                  <p>{author ? author.fullName : "anon"}</p>
                 </li>
                 <li>
                   <h3>Field Officer</h3>

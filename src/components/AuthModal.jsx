@@ -10,23 +10,6 @@ import { LoginSchema } from "../schemas/auth"
 import { useUser } from "../hooks/useUser"
 import FieldError from "./FieldError"
 
-/**
- * @typedef {Object} ModeBtnProps
- * @property {'reg' | 'login'} type
- * @property {'reg' | 'login'} mode
- * @property {('reg' | 'login') => void} setMode
- */
-
-/**
- * @param {ModeBtnProps} props
- */
-function ModeBtn({ mode, type, setMode }) {
-  const cn = mode === type ? 'bg-primary text-on-primary' : 'bg-surface'
-  return (
-    <button className={`text-medium grow py-4 rounded-full ${cn}`} onClick={() => setMode(type === 'login' ? 'login' : 'reg')}>{mode === 'login' ? 'Sign In Existing Account' : 'Register as Citizen'}</button>
-  )
-}
-
 function LoginForm() {
   const { login } = useUser()
   const navigate = useNavigate()
@@ -152,6 +135,11 @@ function AuthModal({ dialogRef }) {
     if (dialogRef.current)
       dialogRef.current.close()
   }
+
+  function handleToggle(mode) {
+    setMode(mode === 'login' ? 'reg' : 'login')
+  }
+
   return (
     <dialog ref={dialogRef} id="login" className="text-on-surface backdrop:bg-on-surface-high/25 backdrop:backdrop-blur-lg justify-center w-full bg-transparent max-w-139 m-auto items-center z-100 open:flex">
       <div className="rounded-2xl overflow-hidden border w-full  bg-surface-container border-outline mx-4 *:px-6 ">
@@ -164,8 +152,8 @@ function AuthModal({ dialogRef }) {
           </button>
         </hgroup>
         <div className="mt-4 gap-2 flex flex-wrap text-sm *:truncate">
-          <ModeBtn mode={mode} type="login" setMode={setMode} />
-          <ModeBtn mode={mode} type="reg" setMode={setMode} />
+          <button type="button" className={`text-medium grow py-4 rounded-full ${mode === "login" ? 'bg-primary text-on-primary' : 'bg-surface'}`} onClick={() => handleToggle(mode)}>Sign In Existing Account</button>
+          <button type="button" className={`text-medium grow py-4 rounded-full ${mode === "reg" ? 'bg-primary text-on-primary' : 'bg-surface'}`} onClick={() => handleToggle(mode)}>Register as Citizen</button>
         </div>
         {mode === 'login' ? <LoginForm /> : <RegisterForm />}
       </div>
