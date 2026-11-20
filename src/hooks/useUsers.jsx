@@ -40,6 +40,7 @@ export const useUsers = () => {
       nik: nik || null,
       role: 'citizen',
       password,
+      alerts: [],
       createdAt: Date.now(),
     }
     setUsers([...(users ?? []), newUser])

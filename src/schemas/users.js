@@ -1,4 +1,10 @@
-import { number, object, string } from "yup";
+import { array, number, object, string } from "yup";
+
+export const ALERT_OPTIONS = {
+  "STATUS_UPDATE": "status-update",
+  "URGENT_SMS": "urgent-sms",
+  "WEEKLY_DIGEST": "weekly-digest"
+}
 
 export const UserSchema = object({
   id: number().required(),
@@ -8,6 +14,7 @@ export const UserSchema = object({
   phone: string().required(),
   role: string().oneOf(['citizen', 'admin']).required(),
   nik: string().nullable(),
+  alerts: array().of(string().oneOf(Object.values(ALERT_OPTIONS))).default([]),
   createdAt: number().required()
 })
 
@@ -31,3 +38,4 @@ export const CreateUserSchema = object({
  */
 
 export const UpdateProfileSchema = CreateUserSchema.pick(['email', 'fullName', 'nik', 'phone'])
+export const UpdateAlertsSchema = UserSchema.pick(['alerts'])

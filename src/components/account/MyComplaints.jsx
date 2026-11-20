@@ -35,7 +35,7 @@ function MyComplaints() {
               <tbody
                 className="text-xs bg-surface-container divide-y divide-outline [&_th]:text-primary [&_th]:text-start [&_th,&_td]:px-3 [&_th,&_td]:py-4">
                 {reports && reports.length > 0 && reports.map(report => (
-                  <tr>
+                  <tr key={`report-${report.id}`}>
                     <th scope="row">{report.id}</th>
                     <td className="font-semibold">
                       <div className="flex flex-col">
