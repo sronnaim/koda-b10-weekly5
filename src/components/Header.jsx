@@ -107,15 +107,18 @@ export default function Header({ authDialogRef }) {
             </ul>
           </nav>
           <div className="md:flex md:items-center gap-2">
-            {user && <NavLink to='/' className="px-1! relative"><LuBell size={16} /><span className='absolute translate-x-2 -translate-y-2 w-1.5 h-1.5 rounded-full bg-primary flex' /></NavLink>}
-            {user ? <UserChip {...user} /> : <button
-              to="/login"
-              className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
-              onClick={handleSignIn}
-            >
-              <LuLogIn />
-              Sign In
-            </button>}
+            <span className='flex items-center my-2'>
+              {user && <NavLink to='/' className="px-1! relative w-fit"><LuBell size={16} /><span className='absolute translate-x-2 -translate-y-2 w-1.5 h-1.5 rounded-full bg-primary flex' /></NavLink>}
+              {user ? <UserChip {...user} /> : <button
+                to="/login"
+                className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
+                onClick={handleSignIn}
+              >
+                <LuLogIn />
+                Sign In
+              </button>}
+
+            </span>
             <Link
               to="/report/new"
               className="flex justify-center items-center gap-2 bg-primary py-2 px-3 text-on-primary rounded-full"

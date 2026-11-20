@@ -47,7 +47,7 @@ function UserChip(user) {
         </span>
         <span className='flex items-center'>
           <LuUser size={10} />
-          <Link to='/profile' className='truncate'>My Filed Reports</Link>
+          <Link to='/account/complaints' className='truncate'>My Filed Reports</Link>
         </span>
         <span className='flex items-center text-danger'>
           <LuLogOut size={10} />

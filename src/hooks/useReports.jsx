@@ -41,7 +41,6 @@ export function useReports() {
     return list.filter(r => r.authorId === authorId)
   }
 
-
   function upvote(id) {
     setReports(list.map(r => (r.id === id ? { ...r, upvotes: r.upvotes + 1 } : r)))
   }

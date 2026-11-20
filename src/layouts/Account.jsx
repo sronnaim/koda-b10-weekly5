@@ -1,6 +1,13 @@
-import { NavLink, Outlet } from "react-router"
+import { NavLink, Outlet, useNavigate } from "react-router"
+import { useUser } from "../hooks/useUser"
 
 function Account() {
+  const { user } = useUser()
+  const navigate = useNavigate()
+
+  if (!user)
+    navigate('/')
+
   return (
     <main className="max-w-272 mt-10 md:mt-16 container grow mx-auto px-4">
       <div>
@@ -29,7 +36,7 @@ function Account() {
             </li>
           </ul>
         </div>
-        <Outlet />
+        <Outlet context={user} />
       </div>
     </main>
   )
