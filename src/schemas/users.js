@@ -1,4 +1,4 @@
-import { array, number, object, string } from "yup";
+import { array, number, object, ref, string } from "yup";
 
 export const ALERT_OPTIONS = {
   "STATUS_UPDATE": "status-update",
@@ -25,7 +25,7 @@ export const UserSchema = object({
 export const CreateUserSchema = object({
   email: string().lowercase().email((i) => `${i.value} not a valid Email`).required('Email required'),
   fullName: string().required("Full name required"),
-  password: string().required("Password required").min(8),
+  password: string().required("Password required").min(8, 'Use at least 8 characters'),
   phone: string()
     .transform((v) => (v ? v.replace(/[\s-]/g, '') : null))
     .matches(/^(\+62|62|0)?8\d{8,11}$/, "Not a valid Indonesian phone number")
@@ -39,3 +39,9 @@ export const CreateUserSchema = object({
 
 export const UpdateProfileSchema = CreateUserSchema.pick(['email', 'fullName', 'nik', 'phone'])
 export const UpdateAlertsSchema = UserSchema.pick(['alerts'])
+
+export const UpdatePasswordSchema = object({
+  current: string().required("Enter your current password"),
+  newPassword: string().required("Password required").min(8, 'Use at least 8 characters'),
+  confirm: string().oneOf([ref('newPassword')], 'New password does not match').required('Confirm your new password')
+})
