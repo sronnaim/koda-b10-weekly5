@@ -4,7 +4,8 @@ import { useReports } from '../hooks/useReports'
 import StatusBadge from '../components/ui/StatusBadge'
 import { useUsers } from '../hooks/useUsers'
 import moment from 'moment'
-import { CATEGORIES } from '../schemas/report'
+import { REPORT_CATEGORIES } from '../schemas/report'
+import { APP_PATHS } from '../components/libs/paths'
 
 function Report() {
   const { id } = useParams()
@@ -23,7 +24,7 @@ function Report() {
         <p className="text-sm text-on-surface-low mt-2">
           It may have been removed, or the link is wrong.
         </p>
-        <Link to="/feed" className="inline-block mt-4 text-primary text-sm">Back to live feed</Link>
+        <Link to={APP_PATHS.feed} className="inline-block mt-4 text-primary text-sm">Back to live feed</Link>
       </main>
     )
   else
@@ -31,7 +32,7 @@ function Report() {
       <main className="max-w-272 mx-auto px-4">
         <div className="mt-10 md:mt-16 grid md:grid-cols-[1fr_auto] gap-6">
           <span className="flex justify-between items-center w-full md:col-span-2">
-            <Link to="/feed" className="text-sm inline-flex items-center text-primary font-semibold">
+            <Link to={APP_PATHS.feed} className="text-sm inline-flex items-center text-primary font-semibold">
               <LuArrowLeft />
               Back to Live Feed
             </Link>
@@ -214,7 +215,7 @@ function Report() {
                 </li>
                 <li>
                   <h3>Category</h3>
-                  <p>{CATEGORIES[r.cat].label}</p>
+                  <p>{REPORT_CATEGORIES[r.cat].label}</p>
                 </li>
                 <li>
                   <h3>Location</h3>

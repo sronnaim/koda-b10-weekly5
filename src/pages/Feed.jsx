@@ -89,7 +89,7 @@ export default function Feed() {
             </fieldset>
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <fieldset
-                className="w-fit flex text-xs flex-wrap bg-surface-container border border-outline rounded-full items-center px-3 py-1 [&_input]:hidden gap-2 [&_label]:rounded-full [&_label]:px-3 [&_label]:py-1 [&_label:has(input:checked)]:bg-primary [&_label:has(input:checked)]:text-on-primary [&_label:has(input:checked)]:font-medium">
+                className="w-fit flex text-xs flex-wrap bg-surface-container border border-outline rounded-2xl lg:rounded-full items-center px-3 py-1 [&_input]:hidden gap-2 [&_label]:rounded-full [&_label]:px-3 [&_label]:py-1 [&_label:has(input:checked)]:bg-primary [&_label:has(input:checked)]:text-on-primary [&_label:has(input:checked)]:font-medium">
                 <legend
                   className="float-left text-2xs font-mono uppercase text-on-surface-low font-light">
                   Status:

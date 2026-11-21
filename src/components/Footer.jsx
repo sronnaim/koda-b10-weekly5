@@ -1,11 +1,12 @@
 import { Link } from "react-router"
+import { APP_PATHS } from "./libs/paths"
 
 export default function Footer() {
   return (
     <footer className="bg-surface-container border-t border-outline mt-30 px-4 py-13">
       <div className="max-w-272 container m-auto grid gap-4 md:grid-cols-2">
         <div className="md:max-w-100 grid gap-6">
-          <Link to="/" className="font-serif text-xl font-bold text-secondary">WargaReport</Link>
+          <Link to={APP_PATHS.home} className="font-serif text-xl font-bold text-secondary">WargaReport</Link>
           <p className="text-sm">WargaReport is an independent civic reporting platform for municipal infrastructure
             issues across
             Indonesia. Residents submit evidence, follow SLA countdowns, and track resolution updates from the
@@ -21,16 +22,16 @@ export default function Footer() {
             <h3>Citizens</h3>
             <ul>
               <li>
-                <Link to="/report/new">File a report</Link>
+                <Link to={APP_PATHS.report.new.root}>File a report</Link>
               </li>
               <li>
-                <Link to="/track">Track complaint</Link>
+                <Link to={APP_PATHS.track}>Track complaint</Link>
               </li>
               <li>
                 <Link to="/reports-registry">Public reports registry</Link>
               </li>
               <li>
-                <Link to="/myfiling">My filing history</Link>
+                <Link to={APP_PATHS.account.complaints}>My filing history</Link>
               </li>
             </ul>
           </div>

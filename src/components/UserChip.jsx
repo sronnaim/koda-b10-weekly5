@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { LuChevronDown, LuChevronUp, LuLogOut, LuUser } from 'react-icons/lu'
 import { Link, useNavigate } from 'react-router'
 import { useUser } from '../hooks/useUser'
+import { APP_PATHS } from './libs/paths'
 
 /**
  * 
@@ -47,11 +48,11 @@ function UserChip(user) {
         </span>
         <span className='flex items-center'>
           <LuUser size={10} />
-          <Link to='/account/complaints' className='truncate'>My Filed Reports</Link>
+          <Link to={APP_PATHS.account.complaints} className='truncate'>My Filed Reports</Link>
         </span>
         <span className='flex items-center text-danger'>
           <LuLogOut size={10} />
-          <Link to='/' onClick={handleLogout}>Sign Out</Link>
+          <Link to={APP_PATHS.home} onClick={handleLogout}>Sign Out</Link>
         </span>
       </div>
       }

@@ -4,6 +4,7 @@ import { LuLogIn, LuPlus, LuMenu, LuBell } from 'react-icons/lu'
 import { useBodyData } from '../hooks/useBodyData'
 import { useUser } from '../hooks/useUser'
 import UserChip from './UserChip'
+import { APP_PATHS } from './libs/paths'
 
 /**
  * @param {React.ButtonHTMLAttributes<HTMLButtonElement>} props
@@ -50,7 +51,7 @@ export default function Header({ authDialogRef }) {
     <header className="z-50 bg-surface-container [body[data-menu=opened]_&]:h-screen sticky [body[data-menu=opened]_&]:fixed inset-0 border-b border-outline">
       <div className="p-1 mx-auto h-full flex [body[data-menu=opened]_&]:flex-col items-center [body[data-menu=opened]_&]:justify-center relative md:max-w-272">
         <Link
-          to="/"
+          to={APP_PATHS.home}
           className="inline-flex items-center font-serif font-bold text-lg p-2 text-secondary"
         >
           <svg
@@ -82,7 +83,7 @@ export default function Header({ authDialogRef }) {
             <ul className="md:flex md:items-center md:justify-center">
               <li>
                 <NavLink
-                  to="/feed"
+                  to={APP_PATHS.feed}
                   className={({ isActive }) => isActive ? 'bg-primary text-on-primary flex justify-center py-2 px-3 rounded-full transition-colors duration-500' : 'flex justify-center py-2 px-3 rounded-full transition-colors duration-500'}
                 >
                   Live Feed
@@ -90,7 +91,7 @@ export default function Header({ authDialogRef }) {
               </li>
               <li>
                 <NavLink
-                  to="/track"
+                  to={APP_PATHS.track}
                   className={({ isActive }) => isActive ? 'bg-primary text-on-primary flex justify-center py-2 px-3 rounded-full transition-colors duration-500' : 'flex justify-center py-2 px-3 rounded-full transition-colors duration-500'}
                 >
                   Track
@@ -98,7 +99,7 @@ export default function Header({ authDialogRef }) {
               </li>
               <li>
                 <NavLink
-                  to="/help"
+                  to={APP_PATHS.help}
                   className={({ isActive }) => isActive ? 'bg-primary text-on-primary flex justify-center py-2 px-3 rounded-full transition-colors duration-500' : 'flex justify-center py-2 px-3 rounded-full transition-colors duration-500'}
                 >
                   How It Works
@@ -108,9 +109,8 @@ export default function Header({ authDialogRef }) {
           </nav>
           <div className="md:flex md:items-center gap-2">
             <span className='flex items-center my-2'>
-              {user && <NavLink to='/' className="px-1! relative w-fit"><LuBell size={16} /><span className='absolute translate-x-2 -translate-y-2 w-1.5 h-1.5 rounded-full bg-primary flex' /></NavLink>}
+              {user && <NavLink to={APP_PATHS.home} className="px-1! relative w-fit"><LuBell size={16} /><span className='absolute translate-x-2 -translate-y-2 w-1.5 h-1.5 rounded-full bg-primary flex' /></NavLink>}
               {user ? <UserChip {...user} /> : <button
-                to="/login"
                 className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
                 onClick={handleSignIn}
               >
@@ -120,7 +120,7 @@ export default function Header({ authDialogRef }) {
 
             </span>
             <Link
-              to="/report/new"
+              to={APP_PATHS.report.new.root}
               className="flex justify-center items-center gap-2 bg-primary py-2 px-3 text-on-primary rounded-full"
             >
               <LuPlus />

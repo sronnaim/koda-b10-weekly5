@@ -1,0 +1,119 @@
+import { yupResolver } from "@hookform/resolvers/yup"
+import { FormProvider, useForm } from "react-hook-form"
+import { LuShield } from "react-icons/lu"
+import { Link, Outlet, ScrollRestoration, useMatches, useNavigate } from "react-router"
+import { CreateReportSchema } from "../schemas/report"
+import { useEffect } from "react"
+import { useUser } from "../hooks/useUser"
+import { useReports } from "../hooks/useReports"
+import { FILE_REPORT_STEPS, getNextStep, getPrevStep, getStepIndexByHandle, getStepsLength } from "../components/libs/fileReport"
+import { APP_PATHS } from "../components/libs/paths"
+
+export default function FileReport() {
+  const { user } = useUser()
+  const navigate = useNavigate()
+  const { create } = useReports()
+  const handle = useMatches().at(-1)?.handle
+  const step = FILE_REPORT_STEPS[handle]
+  const stepsLength = getStepsLength()
+  const nthStep = getStepIndexByHandle(handle) + 1
+  const next = getNextStep(handle)
+  const prev = getPrevStep(handle)
+
+  const methods = useForm({
+    resolver: yupResolver(CreateReportSchema),
+    mode: 'onSubmit',
+  })
+
+  useEffect(() => {
+    if (!user)
+      navigate(APP_PATHS.home)
+
+
+  }, [user, navigate])
+
+  function onSubmit(data) {
+    if (!user.id)
+      return
+
+    const created = create(data, user.id)
+
+    navigate(`/receipt/${created.id}`)
+  }
+
+  async function handleContinue(e) {
+    e.preventDefault()
+    const valid = await methods.trigger(FILE_REPORT_STEPS[handle].fields)
+    if (valid)
+      navigate(next.path)
+  }
+
+  return (
+    <main className="mx-auto container max-w-272 grow px-4 mt-10 md:mt-16" id="new-report">
+      <ScrollRestoration />
+      <div className="grid gap-8 md:grid-cols-[auto_1fr]">
+        <section className="md:max-w-64 flex flex-col gap-4">
+          <div>
+            <hgroup
+              className="*:first:text-xs *:first:text-on-surface-low *:first:font-mono *:first:font-medium *:first:uppercase *:last:font-serif *:last:text-secondary *:last:font-semibold *:last:text-xl *:last:mt-2">
+              <p>Community Intake</p>
+              <h1>Report an Issue</h1>
+            </hgroup>
+            <p className="text-sm mt-2">
+              Public civic reporting for Indonesian
+              municipal services.</p>
+          </div>
+          <ol className="flex flex-col text-xs gap-1 text-on-surface-low">
+            {Object.values(FILE_REPORT_STEPS).map(step => (<li
+              className="px-4 py-3 flex gap-2 rounded-full data-[current=true]:bg-primary data-[current=true]:font-semibold data-[current=true]:text-on-primary data-[current=true]:*:first:text-white/75"
+              key={step.handle}
+              data-current={step.handle === handle}
+            >
+              <span className="font-mono">{String(getStepIndexByHandle(step.handle) + 1).padStart(2, '0')}</span>
+              {step.label}
+            </li>))}
+          </ol>
+          <div className="rounded-xl text-xs bg-surface-container p-4 border border-dashed border-outline">
+            <h2 className="flex items-center gap-1 text-secondary font-semibold">
+              <LuShield />
+              Independent Verification
+            </h2>
+            <p className="mt-2 text-on-surface-low">Our verification desk checks each report and
+              routes it to the municipal agency (Bina
+              Marga, PAM JAYA, Dishub, DLH, Satpol PP,
+              Citata). Resolution timestamps are tracked
+              publicly.</p>
+          </div>
+          <Link to="/feed" className="text-sm font-semibold text-primary">Cancel and return to feed</Link>
+        </section>
+        <section className="bg-surface-container p-8 rounded-2xl border border-outline">
+          <div>
+            <div>
+              <hgroup
+                className="*:first:text-xs *:first:text-on-surface-low *:first:font-mono *:first:font-medium *:first:uppercase *:last:font-serif *:last:text-secondary *:last:font-semibold *:last:text-2xl *:last:mt-2">
+                <p>Step {String(nthStep).padStart(2, '0')} of {String(stepsLength).padStart(2, '0')}</p>
+                <h2>{step.title}</h2>
+              </hgroup>
+              <p className="text-sm mt-2">{step.desc}</p>
+            </div>
+            <FormProvider {...methods}>
+              <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+                <Outlet />
+                <div
+                  className="mt-4 pt-6 flex flex-wrap justify-between font-semibold text-sm items-center border-t border-outline">
+                  {prev
+                    ? <Link className="text-primary" to={prev.path}>← Back</Link>
+                    : <Link className="text-primary" to="/">Cancel</Link>
+                  }
+                  {!next
+                    ? <button type="submit" key="submit" className="flex items-center px-5 py-3 bg-primary text-on-primary rounded-full">Dispatch report →</button>
+                    : <Link key="next" className="flex items-center px-5 py-3 bg-primary text-on-primary rounded-full" to={next.path} onClick={handleContinue}>Continue →</Link>}
+
+                </div>
+              </form>
+            </FormProvider>
+          </div>
+        </section>
+      </div>
+    </main>)
+}

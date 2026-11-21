@@ -1,8 +1,9 @@
 import { LuFileText, LuMapPin, LuThumbsUp } from 'react-icons/lu'
 import StatusBadge from './ui/StatusBadge'
 import { Link } from 'react-router'
-import { CATEGORIES } from '../schemas/report'
+import { REPORT_CATEGORIES } from '../schemas/report'
 import moment from 'moment'
+import { APP_PATHS } from './libs/paths'
 
 /**
  * @typedef {Object} FeedListItemProps
@@ -15,7 +16,7 @@ import moment from 'moment'
  * @returns 
  */
 function FeedListItem({ report }) {
-  const cat = CATEGORIES[report.cat]
+  const cat = REPORT_CATEGORIES[report.cat]
 
   return (
     <li className="flex items-center gap-4 p-4">
@@ -64,7 +65,7 @@ function FeedListItem({ report }) {
               <span>x proofs</span>
             </span>
             <span>{moment(report.createdAt).format('MMM E')}</span>
-            <Link to={`/report/${report.id}`} className="text-primary font-semibold font-sans">Track
+            <Link to={`${APP_PATHS.report.root}/${report.id}`} className="text-primary font-semibold font-sans">Track
               → </Link>
           </div>
         </div>

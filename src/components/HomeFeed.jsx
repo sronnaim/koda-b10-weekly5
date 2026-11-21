@@ -1,6 +1,7 @@
 import { LuMapPin, LuThumbsUp } from 'react-icons/lu'
 import { Link } from 'react-router'
 import StatusBadge from './ui/StatusBadge'
+import { APP_PATHS } from './libs/paths'
 
 /**
  * @typedef {Object} HomeCardProps
@@ -42,7 +43,7 @@ function Card({ report }) {
             <span className="sr-only">Liked by {report.upvotes} citizens</span>
             <span aria-hidden="true">{report.upvotes}</span>
           </button>
-          <Link to={`/report/${report.id}`}>
+          <Link to={`${APP_PATHS.report.root}/${report.id}`}>
             Inspect →
           </Link>
         </div>
@@ -69,9 +70,9 @@ function HomeFeed({ reports }) {
           <h2 className="text-xl font-serif text-secondary font-semibold">Recent Community Reports</h2>
           <p className="text-xs">Verified reports lodged in Jakarta and surrounding regions</p>
         </div>
-        <a href="/feed" className="text-xs flex flex-col font-semibold text-primary md:translate-y-4">
+        <Link to={APP_PATHS.feed} className="text-xs flex flex-col font-semibold text-primary md:translate-y-4">
           View live feed →
-        </a>
+        </Link>
       </div>
       <ol
         className="mt-6 grid md:grid-cols-2 gap-4 [&_li]:grid [&_li]:gap-2 [&_li]:lg:grid-cols-[auto_1fr] [&_li]:p-4 [&_li]:rounded-2xl [&_li]:border [&_li]:border-outline [&_li]:max-w-96 [&_li]:lg:max-w-none [&_li]:mx-auto [&_li]:bg-surface-container [&_li>:first-child,&_li_img]:aspect-square [&_li>:first-child]:rounded-2xl [&_li>:first-child]:overflow-hidden [&_li>:first-child]:lg:max-w-24 [&_li_img]:w-full [&_li_img]:object-cover">

@@ -3,6 +3,7 @@ import StatusBadge from "../components/ui/StatusBadge"
 import { Link, useParams } from "react-router"
 import { useReports } from "../hooks/useReports"
 import moment from "moment"
+import { APP_PATHS } from "../components/libs/paths"
 
 /**
  * 
@@ -56,14 +57,14 @@ function Receipt() {
             </div>
 
             <div className="flex gap-3 items-center flex-wrap text-sm mt-6 border-t border-outline pt-6">
-              <Link to={`/report/${r.id}`} className="bg-primary text-on-primary px-5 py-2.5 rounded-full">
+              <Link to={`${APP_PATHS.report.root}/${r.id}`} className="bg-primary text-on-primary px-5 py-2.5 rounded-full">
                 Track report status →
               </Link>
               <button className="inline-flex text-secondary font-semibold items-center gap-2 px-5 py-2.5 rounded-full border border-outline" onClick={handlePrint}>
                 <LuPrinter />
                 Print receipt
               </button>
-              <Link to={'feed'} className="text-primary font-semibold">Back to Feed</Link>
+              <Link to={APP_PATHS.feed} className="text-primary font-semibold">Back to Feed</Link>
             </div>
           </div>
         </div>

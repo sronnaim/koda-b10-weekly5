@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 import { LuChevronDown, LuChevronUp, LuMapPin } from 'react-icons/lu'
-import FieldError from './ui/FieldError'
+import FieldError from '../ui/FieldError'
 
 function FileReportLocation() {
   const { register, formState: { errors } } = useFormContext()

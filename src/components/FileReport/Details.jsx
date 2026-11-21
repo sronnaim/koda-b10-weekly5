@@ -1,7 +1,8 @@
-import { useFormContext } from 'react-hook-form'
-import { LuLock } from 'react-icons/lu'
-import FieldError from './ui/FieldError'
-import { useUser } from '../hooks/useUser'
+import { useFormContext } from "react-hook-form"
+import { useUser } from "../../hooks/useUser"
+import FieldError from "../ui/FieldError"
+import { LuLock } from "react-icons/lu"
+
 
 function FileReportDetails() {
   const { user } = useUser()
@@ -44,7 +45,7 @@ function FileReportDetails() {
           Filer Name *
           <input
             className="border p-3 mt-2 border-outline rounded-xl font-sans text-sm text-secondary"
-            name="name" type="text" autocomplete="name" defaultValue={user?.fullName} {...register('name')} />
+            name="name" type="text" autoComplete="name" defaultValue={user?.fullName} {...register('name')} />
           <FieldError error={errors.name} />
         </label>
 
@@ -52,14 +53,14 @@ function FileReportDetails() {
           Email for Status Alerts *
           <input
             className="border p-3 mt-2 border-outline rounded-xl font-sans text-sm text-secondary"
-            name="email" type="email" defaultValue={user?.email} autocomplete="email" {...register('email')} />
+            name="email" type="email" defaultValue={user?.email} autoComplete="email" {...register('email')} />
           <FieldError error={errors.email} />
         </label>
         <label className="font-mono uppercase text-xs flex flex-col font-medium">
           Phone / Whatsapp
           <input
             className="border p-3 mt-2 border-outline rounded-xl font-sans text-sm text-secondary"
-            name="phone" type="tel" defaultValue={user?.phone} autocomplete="tel" {...register('phone')} />
+            name="phone" type="tel" defaultValue={user?.phone} autoComplete="tel" {...register('phone')} />
           <FieldError error={errors.phone} />
         </label>
         <fieldset className="grid grid-cols-2 w-fit items-end text-xs [&_label]:py-2 *:flex *:gap-2">

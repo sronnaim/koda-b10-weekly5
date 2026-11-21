@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { LuArrowRight, LuCamera } from 'react-icons/lu'
 import { useReports } from '../hooks/useReports'
 import HomeFeed from '../components/HomeFeed'
+import { APP_PATHS } from '../components/libs/paths'
 
 export default function HomePage() {
   const { reports } = useReports()
@@ -18,14 +19,14 @@ export default function HomePage() {
           fixes like a food
           delivery order, and keep authorities accountable.</p>
         <div className="flex flex-wrap items-center gap-2">
-          <Link to="/report/new"
+          <Link to={APP_PATHS.report.new.root}
             className="font-semibold flex items-center gap-2 py-2 px-4 bg-primary rounded-full text-on-primary">
             <LuCamera />
             Snap a report
             <LuArrowRight />
           </Link>
 
-          <Link to="/track"
+          <Link to={APP_PATHS.track}
             className="font-semibold flex items-center gap-2 py-2 px-4 rounded-full bg-surface-container text-secondary border border-outline">
             Track a case
           </Link>
