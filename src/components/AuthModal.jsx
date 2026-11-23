@@ -141,7 +141,7 @@ function AuthModal({ dialogRef }) {
   }
 
   return (
-    <dialog ref={dialogRef} id="login" className="text-on-surface backdrop:bg-on-surface-high/25 backdrop:backdrop-blur-lg justify-center w-full bg-transparent max-w-139 m-auto items-center z-100 open:flex">
+    <dialog ref={dialogRef} id="login" className="text-on-surface backdrop:bg-on-surface-high/25 backdrop:backdrop-blur-lg justify-center w-full bg-transparent max-w-139 m-auto items-center z-100 open:flex overscroll-contain">
       <div className="rounded-2xl overflow-hidden border w-full  bg-surface-container border-outline mx-4 *:px-6 ">
         <hgroup className="bg-surface py-6 relative grid grid-cols-[1fr_auto]">
           <h1 className="text-lg text-secondary font-semibold font-serif">Sign In to WargaReport</h1>
