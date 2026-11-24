@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { getAreas } from '../../api/areas'
 
 function FileReportLocation() {
-  const { register, watch, setValue, formState: { errors } } = useFormContext()
+  const { register, watch, setFocus, setValue, formState: { errors } } = useFormContext()
   const [areas, setAreas] = useState([])
 
   const areaId = watch('area')
@@ -17,6 +17,10 @@ function FileReportLocation() {
     })()
   }, [setAreas])
 
+  function handleShortcut(e) {
+    setValue('address', e.currentTarget.value)
+    setFocus('address')
+  }
   return (
     <div id="new-report-2" className="flex flex-col gap-6 mt-8">
       <div className="flex flex-col">
@@ -44,7 +48,7 @@ function FileReportLocation() {
           {area && area.places.length > 0 && area.places.map(place => <label key={place.label}
             className="inline-flex items-center text-xs border px-3 border-outline font-medium gap-1 py-2 rounded-full [&:has(input:checked)]:bg-primary [&:has(input:checked)]:text-on-primary cursor-pointer">
             {place.label}
-            <input type="radio" name="places-set" value={place.address} className="hidden" onClick={(e) => setValue('address', e.currentTarget.value)} />
+            <input type="radio" name="places-set" value={place.address} className="hidden" onClick={handleShortcut} />
           </label>)
           }
         </fieldset>
