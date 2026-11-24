@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { UpdatePasswordSchema } from '../../schemas/users'
 import { useOutletContext } from 'react-router'
 import FieldError from '../ui/FieldError'
-import { authenticate, updateUserById } from '../../api/users'
+import { authenticate, updatePassword } from '../../api/users'
 import { refresh } from '../../redux/slices/auth.slice'
 import { useDispatch } from 'react-redux'
 
@@ -24,7 +24,7 @@ function MySecurity() {
       return
     }
 
-    updateUserById(validUser.id, { password: data.newPassword })
+    updatePassword(validUser.id, data.newPassword)
     rdxDispatch(refresh())
     window.alert('Password updated!')
   }

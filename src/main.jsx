@@ -33,7 +33,7 @@ export const router = createBrowserRouter([{
     path: APP_PATHS.home,
     Component: HomePage
   }, {
-    path: '/report/new',
+    path: APP_PATHS.report.new.root,
     Component: FileReportLayout,
     children: [{
       index: true,
@@ -55,43 +55,42 @@ export const router = createBrowserRouter([{
   }, {
     path: '/report/:id',
     Component: Report
+  }, {
+    path: 'account',
+    Component: AccountLayout,
+    children: [{
+      path: 'complaints',
+      Component: MyComplaints,
+    }, {
+      index: true,
+      element: <Navigate to={APP_PATHS.account.profile} replace />
+    }, {
+      path: 'profile',
+      Component: MyProfile,
+    }, {
+      path: 'alerts',
+      Component: MyAlerts
+    }, {
+      path: 'privacy',
+      Component: MyPrivacy
+    }, {
+      path: 'security',
+      Component: MySecurity
+    }]
+  }, {
+    path: 'feed',
+    Component: Feed
+  }, {
+    path: 'track',
+    Component: Track
+  }, {
+    path: 'help',
+    Component: Help
+  }, {
+    path: '/receipt/:id',
+    Component: Receipt,
   }]
-}, {
-  path: 'account',
-  Component: AccountLayout,
-  children: [{
-    path: 'complaints',
-    Component: MyComplaints,
-  }, {
-    index: true,
-    element: Navigate
-  }, {
-    path: 'profile',
-    Component: MyProfile,
-  }, {
-    path: 'alerts',
-    Component: MyAlerts
-  }, {
-    path: 'privacy',
-    Component: MyPrivacy
-  }, {
-    path: 'security',
-    Component: MySecurity
-  }]
-}, {
-  path: 'feed',
-  Component: Feed
-}, {
-  path: 'track',
-  Component: Track
-}, {
-  path: 'help',
-  Component: Help
-}, {
-  path: '/receipt/:id',
-  Component: Receipt,
-}]
-)
+}])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

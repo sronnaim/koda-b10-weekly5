@@ -1,7 +1,9 @@
+import moment from "moment"
+
+const KEY = 'users'
 /**
  * @typedef {import("../schemas/users").User} UserNotSafe
  */
-
 
 /**
  * @typedef {Omit<UserNotSafe, 'password'>} User
@@ -12,30 +14,41 @@
  */
 
 /**
- * 
- * @returns {User[]}
+ * @returns {UserNotSafe []}
  */
-export function getUsers() {
-  const raw = localStorage.getItem('users')
-
-  if (!raw)
-    return []
-
+function readAll() {
   try {
-    const users = window.JSON.parse(raw)
-
-    if (!Array.isArray(users))
-      return []
-
-    return users.map((user) => {
-      delete user.password
-
-      return user
-    })
+    const users = JSON.parse(localStorage.getItem(KEY))
+    return Array.isArray(users) ? users : []
   } catch (err) {
     console.error(err)
     return []
   }
+}
+
+/**
+ * 
+ * @param {UserNotSafe[]} data 
+ */
+function save(data) {
+  localStorage.setItem(KEY, JSON.stringify(data))
+}
+
+/**
+ * 
+ * @param {UserNotSafe}
+ * @returns {User}
+ */
+function mapToSafe({ password, ...user }) {
+  return user
+}
+
+/**
+ * 
+ * @returns {User[]}
+ */
+export function getUsers() {
+  return readAll().map(mapToSafe)
 }
 
 /**
@@ -57,8 +70,9 @@ export function findUserById(id) {
  * @returns {User | null}
  */
 export function createUser(createUserData) {
-  const users = getUsers()
-  const foundDuplicate = users.find(user => user.email === createUserData.email.toLowerCase().trim())
+  const users = readAll()
+  const email = createUserData.email.toLowerCase().trim()
+  const foundDuplicate = users.find(user => user.email === email)
 
   if (foundDuplicate)
     return null
@@ -67,20 +81,20 @@ export function createUser(createUserData) {
   const role = createUserData.role ? createUserData.role : 'citizen'
 
   const newUser = {
+    ...createUserData,
     id,
     role,
+    email,
     alerts: [],
-    createdAt: window.Date.now() * 1000,
-    ...createUserData,
+    createdAt: moment().unix(),
   }
 
   users.push(newUser)
 
-  return {
-    id,
-    role,
-    ...createUserData
-  }
+  save(users)
+
+  delete newUser.password
+  return newUser
 }
 
 /**
@@ -90,30 +104,30 @@ export function createUser(createUserData) {
  * @returns {User | null} 
  */
 export function updateUserById(id, update) {
-  const users = getUsers()
-
-  const foundUser = users.find(user => user.id === id)
-
-  if (!foundUser)
-    return null
-
-  const updatedUser = {
-    id,
-    ...foundUser,
-    ...update
-  }
-
-  const newUsers = users.map(user => {
-    if (user.id === id)
-      return updatedUser
-
-    return user
-  })
-
   try {
+    const users = readAll()
+
+    const foundUser = users.find(user => user.id === id)
+
+    if (!foundUser)
+      return null
+
+    const updatedUser = {
+      id,
+      ...foundUser,
+      ...update
+    }
+
+    const newUsers = users.map(user => {
+      if (user.id === id)
+        return updatedUser
+
+      return user
+    })
+
     localStorage.setItem('users', JSON.stringify(newUsers))
 
-    return updatedUser
+    return mapToSafe(newUsers)
   } catch (err) {
     console.error(err)
     return null
@@ -123,19 +137,27 @@ export function updateUserById(id, update) {
 /**
  * 
  * @param {string} id 
- * @returns {string}
+ * @param {string} newPassword 
  */
-export function deleteUserById(id) {
-  const users = getUsers()
-  const foundUser = users.find(user => user.id === id)
-
-  if (!foundUser)
-    return null
-
-  const newUsers = users.filter(user => user.id !== id)
-
+export function updatePassword(id, newPassword) {
   try {
-    localStorage.set('users', JSON.stringify(newUsers))
+    const users = readAll()
+    const foundUser = users.find(user => user.id === id)
+
+    if (!foundUser)
+      return null
+
+    const newUsers = users.map(user => {
+      if (user.id === id)
+        return {
+          ...user,
+          password: newPassword
+        }
+
+      return user
+    })
+
+    save(newUsers)
     return id
   } catch (err) {
     console.error(err)
@@ -145,34 +167,22 @@ export function deleteUserById(id) {
 
 /**
  * 
+ * @param {string} id 
+ */
+export function deleteUserById(id) {
+  const users = readAll()
+  save(users.filter(u => u.id !== id))
+}
+
+/**
+ * 
  * @param {string} email 
  * @param {string} password 
  * @returns {Pick<User, 'id' | 'email' | 'role' | 'fullName'> | null}
  */
 export function authenticate(email, password) {
-  /**
-   * @returns {UserNotSafe[]}
-   */
-  function getUsersNotSafe() {
-    const raw = localStorage.getItem('users')
-
-    if (!raw)
-      return []
-
-    try {
-      const users = window.JSON.parse(raw)
-
-      if (!Array.isArray(users))
-        return []
-
-      return users
-    } catch (err) {
-      console.error(err)
-      return []
-    }
-  }
-
-  const foundUser = getUsersNotSafe().find(user => user.email === email.trim().toLowerCase())
+  const foundUser = readAll()
+    .find(user => user.email === email.trim().toLowerCase())
 
   if (!foundUser)
     return null
