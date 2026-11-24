@@ -1,12 +1,11 @@
 import { Link } from 'react-router'
 import { LuArrowRight, LuCamera } from 'react-icons/lu'
-import { useReports } from '../hooks/useReports'
 import HomeFeed from '../components/HomeFeed'
 import { APP_PATHS } from '../libs/router'
+import { useSelector } from 'react-redux'
 
 export default function HomePage() {
-  const { reports } = useReports()
-
+  const reports = useSelector(state => state.reports)
   return (
     <main className="max-w-272 container grow mx-auto px-4">
       <section className="flex flex-col gap-6">

@@ -56,8 +56,6 @@ export const REPORT_CATEGORIES = {
 
 export const REPORT_CATEGORY_IDS = Object.entries(REPORT_CATEGORIES).map(([key]) => key)
 
-export const AREA_IDS = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6']
-
 export const REPORT_STATUSES = Object.freeze({
   SUBMITTED: 'submitted',
   RECEIVED: 'redeived',
@@ -83,7 +81,7 @@ export const ReportSchema = object({
     .required('Select a category'),
 
 
-  area: string().oneOf(AREA_IDS, 'Select an area').required('Select an area'),
+  area: string().required('Select an area'),
   address: string().trim().min(5, 'Be more specific').required('Address or landmark required'),
 
   title: string().trim().min(5, 'Title too short').max(100, 'Max 100 characters').required('Title required'),

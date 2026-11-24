@@ -1,0 +1,84 @@
+[
+  {
+    "id": "dago",
+    "label": "Dago",
+    "places": [
+      {
+        "label": "Simpang Dago",
+        "address": "Simpang Dago, Jl. Ir. H. Juanda, RT 03/RW 05, Dago"
+      },
+      {
+        "label": "Pasar Simpang Dago",
+        "address": "Pasar Simpang Dago, Jl. Dipatiukur No. 1, Dago"
+      },
+      {
+        "label": "Terminal Dago",
+        "address": "Terminal Dago, Jl. Ir. H. Juanda, Dago"
+      },
+      {
+        "label": "Jl. Ir. H. Juanda",
+        "address": "Jl. Ir. H. Juanda No. 100, RT 02/RW 04, Dago"
+      }
+    ]
+  },
+  {
+    "id": "lebak-siliwangi",
+    "label": "Lebak Siliwangi",
+    "places": [
+      {
+        "label": "ITB (Gerbang Utama)",
+        "address": "Jl. Ganesha No. 10, depan gerbang utama ITB, Lebak Siliwangi"
+      },
+      {
+        "label": "Kebun Binatang Bandung",
+        "address": "Jl. Tamansari No. 30, depan Kebun Binatang, Lebak Siliwangi"
+      },
+      {
+        "label": "Jl. Tamansari",
+        "address": "Jl. Tamansari, RT 01/RW 03, Lebak Siliwangi"
+      }
+    ]
+  },
+  {
+    "id": "lebak-gede",
+    "label": "Lebak Gede",
+    "places": [
+      {
+        "label": "Jl. Dipatiukur",
+        "address": "Jl. Dipatiukur No. 35, RT 04/RW 02, Lebak Gede"
+      },
+      {
+        "label": "Unpad Dipatiukur",
+        "address": "Kampus Unpad Dipatiukur, Jl. Dipatiukur No. 35, Lebak Gede"
+      }
+    ]
+  },
+  {
+    "id": "sekeloa",
+    "label": "Sekeloa",
+    "places": [
+      {
+        "label": "Jl. Sekeloa",
+        "address": "Jl. Sekeloa Tengah, RT 05/RW 06, Sekeloa"
+      },
+      {
+        "label": "Jl. Cisitu Lama",
+        "address": "Jl. Cisitu Lama, RT 02/RW 01, Sekeloa"
+      }
+    ]
+  },
+  {
+    "id": "cipaganti",
+    "label": "Cipaganti",
+    "places": [
+      {
+        "label": "Jl. Cipaganti",
+        "address": "Jl. Cipaganti No. 75, RT 03/RW 04, Cipaganti"
+      },
+      {
+        "label": "Jl. Setiabudi",
+        "address": "Jl. Dr. Setiabudi, depan Terminal Ledeng, Cipaganti"
+      }
+    ]
+  }
+]
