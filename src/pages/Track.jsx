@@ -12,7 +12,7 @@ const searchSchema = object({
 
 export default function Track() {
   const navigate = useNavigate()
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(searchSchema), mode: "onBlur" })
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(searchSchema) })
 
   function onSubmit(data) {
     navigate(`/report/${data.q}`)
