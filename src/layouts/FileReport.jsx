@@ -29,6 +29,18 @@ export default function FileReport() {
     mode: 'onSubmit',
   })
 
+  if (!user)
+    return <Navigate to={APP_PATHS.home} replace />
+
+  const firstInvalidStep = Object.values(FILE_REPORT_STEPS)
+    .slice(0, nthStep - 1)
+    .find(step =>
+      !CreateReportSchema.pick(step.fields).isValidSync(methods.getValues())
+    )
+
+  if (firstInvalidStep)
+    return <Navigate to={firstInvalidStep.path} replace />
+
   function onSubmit(data) {
     if (!user.id)
       return
@@ -57,9 +69,6 @@ export default function FileReport() {
     if (valid)
       navigate(next.path)
   }
-
-  if (!user)
-    return <Navigate to={APP_PATHS.home} />
 
   return (
     <main className="mx-auto container max-w-272 grow px-4 mt-10 md:mt-16" id="new-report">
