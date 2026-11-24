@@ -3,11 +3,10 @@ import { useForm } from "react-hook-form"
 import { useOutletContext } from "react-router"
 import { UpdateProfileSchema } from "../../schemas/users"
 import FieldError from "../ui/FieldError"
-import { useUsers } from "../../hooks/useUsers"
+import { updateUserById } from "../../api/users"
 
 function MyProfile() {
   const user = useOutletContext()
-  const { updateUser } = useUsers()
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onSubmit',
@@ -15,7 +14,7 @@ function MyProfile() {
   })
 
   function onSubmit(data) {
-    const id = updateUser(user.id, data)
+    const id = updateUserById(user.id, data)
 
     if (id)
       window.alert('Updated')

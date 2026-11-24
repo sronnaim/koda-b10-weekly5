@@ -2,12 +2,11 @@ import { useForm } from "react-hook-form"
 import { useOutletContext } from "react-router"
 import { ALERT_OPTIONS, UpdateAlertsSchema } from "../../schemas/users"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { useUsers } from "../../hooks/useUsers"
 import FieldError from "../ui/FieldError"
+import { updateUserById } from "../../api/users"
 
 function MyAlerts() {
   const user = useOutletContext()
-  const { updateUser } = useUsers()
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(UpdateAlertsSchema),
@@ -15,7 +14,7 @@ function MyAlerts() {
   })
 
   function onSubmit(data) {
-    updateUser(user.id, { ...user, alerts: data.alerts })
+    updateUserById(user.id, data)
     window.alert('Preferences updated')
   }
 

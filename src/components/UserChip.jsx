@@ -1,17 +1,23 @@
 import { useState } from 'react'
 import { LuChevronDown, LuChevronUp, LuLogOut, LuUser } from 'react-icons/lu'
 import { Link, useNavigate } from 'react-router'
-import { useUser } from '../hooks/useUser'
 import { APP_PATHS } from './libs/paths'
+import { useDispatch } from 'react-redux'
+import { logout } from '../redux/slices/auth.slice'
+
+/**
+ * @typedef {Object} UserChipProps
+ * @property {import('../api/users').User} user
+ */
 
 /**
  * 
- * @param {import('../hooks/useUser').SessionUser} user 
- * @returns 
+ * @param {UserChipProps} props 
  */
-function UserChip(user) {
-  const { logout } = useUser()
+function UserChip({ user }) {
   const navigate = useNavigate()
+  const rdxDispatch = useDispatch()
+
 
   const [expanded, setExpanded] = useState(false)
 
@@ -22,7 +28,7 @@ function UserChip(user) {
   }
 
   function handleLogout() {
-    logout()
+    rdxDispatch(logout())
     window.alert("You've been logged out!")
     navigate('/')
   }
@@ -41,7 +47,7 @@ function UserChip(user) {
         </span>
         {expanded ? <LuChevronUp size={8} /> : <LuChevronDown size={8} />}
       </button>
-      {expanded && <div className='fixed top-[25%] md:top-8 md:absolute flex flex-col *:not-last:border-b *:not-last:border-outline overflow-hidden text-2xs rounded-lg border border-outline bg-surface-container px-3 py-2'>
+      {expanded && <div id='chip-menu' className='fixed top-[25%] md:top-8 md:absolute flex flex-col *:not-last:border-b *:not-last:border-outline overflow-hidden text-2xs rounded-lg border border-outline bg-surface-container px-3 py-2'>
         <span className='flex flex-col pb-1'>
           <span className='font-semibold text-secondary'>{user.fullName}</span>
           <span className='font-mono text-on-surface-low'>{user.email}</span>

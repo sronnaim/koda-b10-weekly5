@@ -1,0 +1,79 @@
+[
+  {
+    "id": "25b6a84c-3520-4b88-9464-e7395406fb97",
+    "email": "admin@wargareport.id",
+    "fullName": "Admin WargaReport",
+    "password": "admin123",
+    "phone": "+6281200000001",
+    "role": "admin",
+    "nik": null,
+    "alerts": [],
+    "createdAt": 1735689600000
+  },
+  {
+    "id": "bd0143a0-d397-40f5-9035-47f11811cb0c",
+    "email": "budi.santoso@example.com",
+    "fullName": "Budi Santoso",
+    "password": "budi2024",
+    "phone": "+6281234567801",
+    "role": "citizen",
+    "nik": "3171012503900001",
+    "alerts": [
+      "status-update",
+      "urgent-sms"
+    ],
+    "createdAt": 1738368000000
+  },
+  {
+    "id": "acce9667-6462-44a2-bacf-d3237c44b56e",
+    "email": "siti.rahayu@example.com",
+    "fullName": "Siti Rahayu",
+    "password": "siti2024",
+    "phone": "+6285212345602",
+    "role": "citizen",
+    "nik": "3273014708950002",
+    "alerts": [
+      "weekly-digest"
+    ],
+    "createdAt": 1740787200000
+  },
+  {
+    "id": "34efde52-088d-4c8f-8932-ca4a8e9002bc",
+    "email": "rina.wijaya@example.com",
+    "fullName": "Rina Wijaya",
+    "password": "rina2024",
+    "phone": "+6281398765403",
+    "role": "citizen",
+    "nik": null,
+    "alerts": [],
+    "createdAt": 1743465600000
+  },
+  {
+    "id": "c65df160-9823-406d-83b4-10175457f16f",
+    "email": "agus.pratama@example.com",
+    "fullName": "Agus Pratama",
+    "password": "warga123",
+    "phone": "+6287811122204",
+    "role": "citizen",
+    "nik": "3578010112880003",
+    "alerts": [
+      "status-update",
+      "urgent-sms",
+      "weekly-digest"
+    ],
+    "createdAt": 1746057600000
+  },
+  {
+    "id": "d1d7841d-5730-4fde-8281-899865bf20e1",
+    "email": "dewi.lestari@example.com",
+    "fullName": "Dewi Lestari",
+    "password": "password123",
+    "phone": "+6282155566605",
+    "role": "citizen",
+    "nik": null,
+    "alerts": [
+      "status-update"
+    ],
+    "createdAt": 1748736000000
+  }
+]

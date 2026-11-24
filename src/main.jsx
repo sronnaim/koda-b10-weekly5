@@ -22,6 +22,9 @@ import Help from './pages/Help'
 import Receipt from './pages/Receipt'
 import { FILE_REPORT_STEPS } from './components/libs/fileReport'
 import { APP_PATHS } from './components/libs/paths'
+import { Provider as ReduxProvider } from 'react-redux'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+import { persistor, store } from './redux/store'
 
 const router = createBrowserRouter([{
   Component: AppLayout,
@@ -90,6 +93,10 @@ const router = createBrowserRouter([{
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ReduxProvider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </ReduxProvider>
   </StrictMode>,
 )

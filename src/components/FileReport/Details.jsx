@@ -1,12 +1,16 @@
 import { useFormContext } from "react-hook-form"
-import { useUser } from "../../hooks/useUser"
 import FieldError from "../ui/FieldError"
 import { LuLock } from "react-icons/lu"
+import { useSelector } from "react-redux"
+import { useState } from "react"
+import { findUserById } from "../../api/users"
 
 
 function FileReportDetails() {
-  const { user } = useUser()
+  const { id } = useSelector(state => state.auth)
   const { register, formState: { errors } } = useFormContext()
+
+  const [user] = useState(() => id ? findUserById(id) : null)
 
   return (
     <div id="new-report-4" className="mt-6 flex flex-col gap-4">

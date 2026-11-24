@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { Link, NavLink } from 'react-router'
 import { LuLogIn, LuPlus, LuMenu, LuBell, LuX } from 'react-icons/lu'
-import { useUser } from '../hooks/useUser'
 import UserChip from './UserChip'
 import { APP_PATHS } from './libs/paths'
+import { useSelector } from 'react-redux'
 
 /**
  * @typedef MobileMenuModalProps
@@ -84,7 +84,7 @@ function MobileMenuModal({ modalRef, user, handleSignIn }) {
         <div className='text-on-surface text-xs grid gap-2'>
           <span className='flex items-center'>
             {user && <NavLink to={APP_PATHS.home} className="px-1! relative w-fit"><LuBell size={16} /><span className='absolute translate-x-3 -translate-y-5 w-1.5 h-1.5 rounded-full bg-primary flex' /></NavLink>}
-            {user ? <UserChip {...user} /> : <button
+            {user ? <UserChip user={user} /> : <button
               className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
               onClick={handleSignIn}
             >
@@ -132,7 +132,7 @@ function MenuBtn(props) {
  * @param {HeaderProps} props 
  */
 export default function Header({ authDialogRef }) {
-  const { user } = useUser()
+  const user = useSelector(state => state.auth)
   const modalRef = useRef(null)
 
   function handleSignIn() {
@@ -219,7 +219,7 @@ export default function Header({ authDialogRef }) {
             <div className="md:flex md:items-center gap-2">
               <span className='flex items-center my-2'>
                 {user && <NavLink to={APP_PATHS.home} className="px-1! relative w-fit"><LuBell size={16} /><span className='absolute translate-x-2 -translate-y-2 w-1.5 h-1.5 rounded-full bg-primary flex' /></NavLink>}
-                {user ? <UserChip {...user} /> : <button
+                {user ? <UserChip user={user} /> : <button
                   className="flex justify-center items-center gap-2 py-2 px-3 rounded-full"
                   onClick={handleSignIn}
                 >

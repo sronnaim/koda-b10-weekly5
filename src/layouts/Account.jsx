@@ -1,8 +1,12 @@
+import { useState } from "react"
+import { useSelector } from "react-redux"
 import { NavLink, Outlet, useNavigate } from "react-router"
-import { useUser } from "../hooks/useUser"
+import { findUserById } from "../api/users"
 
 function Account() {
-  const { user } = useUser()
+  const authenticatedUser = useSelector(state => state.auth)
+  const [user] = useState(() => findUserById(authenticatedUser.id) || null)
+
   const navigate = useNavigate()
 
   if (!user)

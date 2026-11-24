@@ -4,14 +4,14 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { CreateUserSchema } from "../schemas/users"
-import { useUsers } from "../hooks/useUsers"
 import { useNavigate } from "react-router"
 import { LoginSchema } from "../schemas/auth"
-import { useUser } from "../hooks/useUser"
 import FieldError from "./ui/FieldError"
+import { authenticate as apiAuth, createUser as apiRegisterUser } from "../api/users"
+import { useDispatch } from "react-redux"
+import { login } from "../redux/slices/auth.slice"
 
 function LoginForm() {
-  const { login } = useUser()
   const navigate = useNavigate()
 
   const {
@@ -21,13 +21,16 @@ function LoginForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(LoginSchema) })
 
+  const rdxDispatch = useDispatch()
   function onSubmit(data) {
-    const user = login(data.email, data.password)
+    const authenticatedUser = apiAuth(data.email, data.password)
 
-    if (!user) {
+    if (!authenticatedUser) {
       setError('password', { message: "Incorrect credentials" })
       return
     }
+
+    rdxDispatch(login(authenticatedUser))
 
     window.alert('Logged in successfully!')
     navigate('/account')
@@ -54,7 +57,6 @@ function LoginForm() {
 }
 
 function RegisterForm() {
-  const { register: registerUser } = useUsers()
   const navigate = useNavigate()
 
   const {
@@ -64,14 +66,17 @@ function RegisterForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(CreateUserSchema) })
 
-  async function onSubmit(data) {
-    const user = registerUser(data)
+  const rdxDispatch = useDispatch()
 
-    if (!user) {
+  async function onSubmit(data) {
+    const registeredUser = apiRegisterUser(data)
+
+    if (!registeredUser) {
       setError('email', { message: 'Email is already registered' })
       return
     }
 
+    rdxDispatch(login(registeredUser))
     window.alert('Account created successfully!')
     navigate('/feed')
   }

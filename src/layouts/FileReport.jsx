@@ -3,14 +3,14 @@ import { FormProvider, useForm } from "react-hook-form"
 import { LuShield } from "react-icons/lu"
 import { Link, Outlet, ScrollRestoration, useMatches, useNavigate } from "react-router"
 import { CreateReportSchema } from "../schemas/report"
-import { useEffect } from "react"
-import { useUser } from "../hooks/useUser"
+import { useEffect, useState } from "react"
 import { useReports } from "../hooks/useReports"
 import { FILE_REPORT_STEPS, getNextStep, getPrevStep, getStepIndexByHandle, getStepsLength } from "../components/libs/fileReport"
 import { APP_PATHS } from "../components/libs/paths"
+import { useSelector } from "react-redux"
+import { findUserById } from "../api/users"
 
 export default function FileReport() {
-  const { user } = useUser()
   const navigate = useNavigate()
   const { create } = useReports()
   const handle = useMatches().at(-1)?.handle
@@ -19,6 +19,8 @@ export default function FileReport() {
   const nthStep = getStepIndexByHandle(handle) + 1
   const next = getNextStep(handle)
   const prev = getPrevStep(handle)
+  const authenticatedUser = useSelector(state => state.auth)
+  const [user] = useState(() => authenticatedUser ? findUserById(authenticatedUser.id) : null)
 
   const methods = useForm({
     resolver: yupResolver(CreateReportSchema),
@@ -28,7 +30,6 @@ export default function FileReport() {
   useEffect(() => {
     if (!user)
       navigate(APP_PATHS.home)
-
 
   }, [user, navigate])
 
@@ -115,5 +116,6 @@ export default function FileReport() {
           </div>
         </section>
       </div>
-    </main>)
+    </main>
+  )
 }

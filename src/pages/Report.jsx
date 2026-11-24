@@ -2,7 +2,6 @@ import { LuArrowLeft, LuShare, LuSearch, LuClock, LuThumbsUp, LuUser, LuCpu, LuS
 import { Link, useParams } from 'react-router'
 import { useReports } from '../hooks/useReports'
 import StatusBadge from '../components/ui/StatusBadge'
-import { useUsers } from '../hooks/useUsers'
 import moment from 'moment'
 import { REPORT_CATEGORIES } from '../schemas/report'
 import { APP_PATHS } from '../components/libs/paths'
@@ -10,11 +9,9 @@ import { APP_PATHS } from '../components/libs/paths'
 function Report() {
   const { id } = useParams()
   const { getById } = useReports()
-  const { findById } = useUsers()
 
   const r = getById(id)
   console.log(r)
-  const author = r ? findById(r.authorId) : null
   const d = r ? moment(r.createdAt) : null
 
   if (!r)
@@ -147,7 +144,7 @@ function Report() {
                     Submitted
                   </span>
                 </hgroup>
-                <span className="flex text-xs flex-wrap font-semibold gap-1">{author ? author.fullName : "Anon"}<time
+                <span className="flex text-xs flex-wrap font-semibold gap-1">"Anon"<time
                   className="font-mono text-on-surface-low font-normal"
                   datetime={d.format()}>· {d.format('MMM D, HH:mm A')}</time></span>
                 <span className="text-xs my-2 border border-outline p-4 rounded-2xl">Citizen attached evidences.</span>
@@ -231,7 +228,7 @@ function Report() {
                 </li>
                 <li>
                   <h3>Reported By</h3>
-                  <p>{author ? author.fullName : "anon"}</p>
+                  <p>Anon</p>
                 </li>
                 <li>
                   <h3>Field Officer</h3>

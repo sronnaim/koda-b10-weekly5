@@ -2,13 +2,12 @@ import { useForm } from 'react-hook-form'
 import PasswordField from '../PasswordField'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { UpdatePasswordSchema } from '../../schemas/users'
-import { useUsers } from '../../hooks/useUsers'
 import { useOutletContext } from 'react-router'
 import FieldError from '../ui/FieldError'
+import { authenticate, updateUserById } from '../../api/users'
 
 function MySecurity() {
   const user = useOutletContext()
-  const { authenticate, updateUser } = useUsers()
 
   const { register, handleSubmit, setError, formState: { errors } } = useForm({
     resolver: yupResolver(UpdatePasswordSchema)
@@ -22,7 +21,7 @@ function MySecurity() {
       return
     }
 
-    updateUser(validUser.id, { password: data.newPassword })
+    updateUserById(validUser.id, { password: data.newPassword })
     window.alert('Password updated!')
   }
 
