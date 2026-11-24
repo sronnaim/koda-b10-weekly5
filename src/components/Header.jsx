@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react'
 import { Link, NavLink } from 'react-router'
 import { LuLogIn, LuPlus, LuMenu, LuBell, LuX } from 'react-icons/lu'
 import UserChip from './UserChip'
-import { APP_PATHS } from './libs/paths'
 import { useSelector } from 'react-redux'
+import { APP_PATHS } from '../libs/router'
 
 /**
  * @typedef MobileMenuModalProps

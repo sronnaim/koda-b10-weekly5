@@ -4,9 +4,12 @@ import { ALERT_OPTIONS, UpdateAlertsSchema } from "../../schemas/users"
 import { yupResolver } from "@hookform/resolvers/yup"
 import FieldError from "../ui/FieldError"
 import { updateUserById } from "../../api/users"
+import { useDispatch } from "react-redux"
+import { refresh } from "../../redux/slices/auth.slice"
 
 function MyAlerts() {
   const user = useOutletContext()
+  const rdxDispatch = useDispatch()
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(UpdateAlertsSchema),
@@ -15,6 +18,7 @@ function MyAlerts() {
 
   function onSubmit(data) {
     updateUserById(user.id, data)
+    rdxDispatch(refresh())
     window.alert('Preferences updated')
   }
 

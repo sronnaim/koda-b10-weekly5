@@ -3,7 +3,7 @@ import StatusBadge from './ui/StatusBadge'
 import { Link } from 'react-router'
 import { REPORT_CATEGORIES } from '../schemas/report'
 import moment from 'moment'
-import { APP_PATHS } from './libs/paths'
+import { APP_PATHS } from '../libs/router'
 
 /**
  * @typedef {Object} FeedListItemProps

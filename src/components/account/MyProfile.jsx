@@ -4,9 +4,12 @@ import { useOutletContext } from "react-router"
 import { UpdateProfileSchema } from "../../schemas/users"
 import FieldError from "../ui/FieldError"
 import { updateUserById } from "../../api/users"
+import { useDispatch } from "react-redux"
+import { refresh } from "../../redux/slices/auth.slice"
 
 function MyProfile() {
   const user = useOutletContext()
+  const rdxDispatch = useDispatch()
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onSubmit',
@@ -14,9 +17,11 @@ function MyProfile() {
   })
 
   function onSubmit(data) {
-    const id = updateUserById(user.id, data)
+    const updatedUser = updateUserById(user.id, data)
 
-    if (id)
+    rdxDispatch(refresh())
+
+    if (updatedUser)
       window.alert('Updated')
   }
 

@@ -1,9 +1,9 @@
 import { LuCopy, LuPrinter } from "react-icons/lu"
 import StatusBadge from "../components/ui/StatusBadge"
-import { Link, useParams } from "react-router"
-import { useReports } from "../hooks/useReports"
+import { Link, Navigate, useParams } from "react-router"
 import moment from "moment"
-import { APP_PATHS } from "../components/libs/paths"
+import { useSelector } from "react-redux"
+import { APP_PATHS } from "../libs/router"
 
 /**
  * 
@@ -11,15 +11,14 @@ import { APP_PATHS } from "../components/libs/paths"
  */
 function Receipt() {
   const { id } = useParams()
-  const { getById } = useReports()
-  const r = getById(id)
+  const r = useSelector(state => state.reports).find(r => r.id === id)
 
   function handlePrint() {
     window.print()
   }
 
   if (!r)
-    return <></>
+    return <Navigate to={APP_PATHS.home} />
   else
     return (
       <main className="container mx-auto max-w-272 px-4">

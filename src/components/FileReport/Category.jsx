@@ -14,6 +14,7 @@ function FileReportCategory() {
       <div className="grid grid-cols-2 gap-2 mt-6">
         {categories.map(([key, value]) => (
           <label
+            key={key}
             className="px-4 py-5 flex flex-col gap-2 border border-outline rounded-xl [&:has(input:checked)]:bg-success-container [&:has(input:checked)]:border-on-success-container">
             <span className="flex flex-wrap items-center gap-2" key={key}>
               <value.Icon className="text-primary" />

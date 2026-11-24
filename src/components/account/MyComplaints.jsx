@@ -1,12 +1,11 @@
-import { useReports } from "../../hooks/useReports"
 import { useOutletContext } from "react-router"
 import StatusBadge from "../ui/StatusBadge"
 import moment from "moment"
+import { useSelector } from "react-redux"
 
 function MyComplaints() {
   const user = useOutletContext()
-  const { getByAuthor } = useReports()
-  const reports = getByAuthor(user?.id)
+  const reports = useSelector(state => state.reports).filter(r => r.authorId === user.id)
 
   return (
     <div id="complaints">

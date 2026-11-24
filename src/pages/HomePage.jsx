@@ -2,7 +2,7 @@ import { Link } from 'react-router'
 import { LuArrowRight, LuCamera } from 'react-icons/lu'
 import { useReports } from '../hooks/useReports'
 import HomeFeed from '../components/HomeFeed'
-import { APP_PATHS } from '../components/libs/paths'
+import { APP_PATHS } from '../libs/router'
 
 export default function HomePage() {
   const { reports } = useReports()

@@ -5,9 +5,12 @@ import { UpdatePasswordSchema } from '../../schemas/users'
 import { useOutletContext } from 'react-router'
 import FieldError from '../ui/FieldError'
 import { authenticate, updateUserById } from '../../api/users'
+import { refresh } from '../../redux/slices/auth.slice'
+import { useDispatch } from 'react-redux'
 
 function MySecurity() {
   const user = useOutletContext()
+  const rdxDispatch = useDispatch()
 
   const { register, handleSubmit, setError, formState: { errors } } = useForm({
     resolver: yupResolver(UpdatePasswordSchema)
@@ -22,6 +25,7 @@ function MySecurity() {
     }
 
     updateUserById(validUser.id, { password: data.newPassword })
+    rdxDispatch(refresh())
     window.alert('Password updated!')
   }
 

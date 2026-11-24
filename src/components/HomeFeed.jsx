@@ -1,7 +1,7 @@
 import { LuMapPin, LuThumbsUp } from 'react-icons/lu'
 import { Link } from 'react-router'
 import StatusBadge from './ui/StatusBadge'
-import { APP_PATHS } from './libs/paths'
+import { APP_PATHS } from '../libs/router'
 
 /**
  * @typedef {Object} HomeCardProps

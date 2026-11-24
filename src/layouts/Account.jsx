@@ -1,16 +1,14 @@
-import { useState } from "react"
 import { useSelector } from "react-redux"
-import { NavLink, Outlet, useNavigate } from "react-router"
+import { Navigate, NavLink, Outlet } from "react-router"
 import { findUserById } from "../api/users"
+import { APP_PATHS } from "../libs/router"
 
 function Account() {
   const authenticatedUser = useSelector(state => state.auth)
-  const [user] = useState(() => findUserById(authenticatedUser.id) || null)
-
-  const navigate = useNavigate()
+  const user = authenticatedUser ? findUserById(authenticatedUser.id) : null
 
   if (!user)
-    navigate('/')
+    return <Navigate to={APP_PATHS.home} />
 
   return (
     <main className="max-w-272 mt-10 md:mt-16 container grow mx-auto px-4">

@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import AppLayout from './App'
+import AppLayout from './layouts/App'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router'
 import HomePage from './pages/HomePage'
 import FileReportCategory from './components/FileReport/Category'
@@ -20,76 +20,78 @@ import Feed from './pages/Feed'
 import Track from './pages/Track'
 import Help from './pages/Help'
 import Receipt from './pages/Receipt'
-import { FILE_REPORT_STEPS } from './components/libs/fileReport'
-import { APP_PATHS } from './components/libs/paths'
 import { Provider as ReduxProvider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { persistor, store } from './redux/store'
+import './index.css'
+import { FILE_REPORT_STEPS } from './schemas/report'
+import { APP_PATHS } from './libs/router'
 
-const router = createBrowserRouter([{
+export const router = createBrowserRouter([{
   Component: AppLayout,
   children: [{
-    path: '',
+    path: APP_PATHS.home,
     Component: HomePage
   }, {
-    path: '/report',
+    path: '/report/new',
+    Component: FileReportLayout,
     children: [{
-      path: '/report/new',
-      Component: FileReportLayout,
-      children: [{
-        index: true,
-        Component: FileReportCategory,
-        handle: FILE_REPORT_STEPS.cat.handle
-      }, {
-        path: '/report/new/location',
-        Component: FileReportLocation,
-        handle: FILE_REPORT_STEPS.location.handle
-      }, {
-        path: 'evidence',
-        Component: FileReportEvidence,
-        handle: FILE_REPORT_STEPS.evidence.handle
-      }, {
-        path: 'details',
-        Component: FileReportDetails,
-        handle: FILE_REPORT_STEPS.details.handle
-      }]
+      index: true,
+      Component: FileReportCategory,
+      handle: FILE_REPORT_STEPS.cat.handle
     }, {
-      path: '/report/:id',
-      Component: Report
+      path: '/report/new/location',
+      Component: FileReportLocation,
+      handle: FILE_REPORT_STEPS.location.handle
+    }, {
+      path: 'evidence',
+      Component: FileReportEvidence,
+      handle: FILE_REPORT_STEPS.evidence.handle
+    }, {
+      path: 'details',
+      Component: FileReportDetails,
+      handle: FILE_REPORT_STEPS.details.handle
     }]
   }, {
-    path: 'account',
-    Component: AccountLayout,
-    children: [{
-      path: 'complaints',
-      Component: MyComplaints,
-    }, { index: true, element: <Navigate to={APP_PATHS.account.profile} replace /> }, {
-      path: 'profile',
-      Component: MyProfile,
-    }, {
-      path: 'alerts',
-      Component: MyAlerts
-    }, {
-      path: 'privacy',
-      Component: MyPrivacy
-    }, {
-      path: 'security',
-      Component: MySecurity
-    }]
-  }, {
-    path: 'feed',
-    Component: Feed
-  }, {
-    path: 'track',
-    Component: Track
-  }, {
-    path: 'help',
-    Component: Help
-  }, {
-    path: '/receipt/:id',
-    Component: Receipt,
+    path: '/report/:id',
+    Component: Report
   }]
-}])
+}, {
+  path: 'account',
+  Component: AccountLayout,
+  children: [{
+    path: 'complaints',
+    Component: MyComplaints,
+  }, {
+    index: true,
+    element: Navigate
+  }, {
+    path: 'profile',
+    Component: MyProfile,
+  }, {
+    path: 'alerts',
+    Component: MyAlerts
+  }, {
+    path: 'privacy',
+    Component: MyPrivacy
+  }, {
+    path: 'security',
+    Component: MySecurity
+  }]
+}, {
+  path: 'feed',
+  Component: Feed
+}, {
+  path: 'track',
+  Component: Track
+}, {
+  path: 'help',
+  Component: Help
+}, {
+  path: '/receipt/:id',
+  Component: Receipt,
+}]
+)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

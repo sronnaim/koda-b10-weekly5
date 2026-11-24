@@ -5,9 +5,10 @@ const authSlice = createSlice({
   initialState: null,
   reducers: {
     login: (_, { payload }) => payload,
-    logout: () => null
+    logout: () => null,
+    refresh: (prev) => ({ ...prev })
   }
 })
 
-export const { login, logout } = authSlice.actions
+export const { login, logout, refresh } = authSlice.actions
 export default authSlice.reducer

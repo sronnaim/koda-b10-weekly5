@@ -1,4 +1,4 @@
-export const APP_PATHS = {
+export const APP_PATHS = Object.freeze({
   home: '/',
   report: {
     root: '/report',
@@ -8,7 +8,7 @@ export const APP_PATHS = {
       evidence: '/report/new/evidence',
       details: '/report/new/details'
     },
-  }, 
+  },
   account: {
     complaints: '/account/complaints',
     profile: '/account/profile',
@@ -22,4 +22,4 @@ export const APP_PATHS = {
   receipt: {
     root: '/receipt'
   }
-}
+})

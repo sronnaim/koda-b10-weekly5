@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { LuChevronDown, LuChevronUp, LuLogOut, LuUser } from 'react-icons/lu'
 import { Link, useNavigate } from 'react-router'
-import { APP_PATHS } from './libs/paths'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/slices/auth.slice'
+import { APP_PATHS } from '../libs/router'
 
 /**
  * @typedef {Object} UserChipProps

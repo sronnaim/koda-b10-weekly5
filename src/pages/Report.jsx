@@ -1,17 +1,16 @@
 import { LuArrowLeft, LuShare, LuSearch, LuClock, LuThumbsUp, LuUser, LuCpu, LuShieldCheck, LuInbox } from 'react-icons/lu'
 import { Link, useParams } from 'react-router'
-import { useReports } from '../hooks/useReports'
 import StatusBadge from '../components/ui/StatusBadge'
 import moment from 'moment'
 import { REPORT_CATEGORIES } from '../schemas/report'
-import { APP_PATHS } from '../components/libs/paths'
+import { useSelector } from 'react-redux'
+import { APP_PATHS } from '../libs/router'
 
 function Report() {
   const { id } = useParams()
-  const { getById } = useReports()
 
-  const r = getById(id)
-  console.log(r)
+  const r = useSelector(state => state.reports).find(r => r.id === id)
+
   const d = r ? moment(r.createdAt) : null
 
   if (!r)
@@ -44,7 +43,7 @@ function Report() {
                 <StatusBadge size='lg' status={r.status} />
                 <span className="font-mono text-xs inline-flex items-center gap-2 grow">
                   <LuClock />
-                  <time datetime="">18h 59h</time>left</span>
+                  <time dateTime="">18h 59h</time>left</span>
                 <button className="font-semibold px-4 py-3 border border-outline rounded-full inline-flex items-center gap-1 text-xs">
                   <LuThumbsUp className='text-primary' />
                   <span className="text-on-surface">Upvote</span>

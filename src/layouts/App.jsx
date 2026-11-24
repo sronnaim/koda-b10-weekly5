@@ -1,8 +1,8 @@
-import { Outlet, useLocation } from 'react-router'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import { useEffect, useRef } from 'react'
-import AuthModal from './components/AuthModal'
+import { useEffect, useRef } from "react"
+import { Outlet, useLocation } from "react-router"
+import AuthModal from '../components/AuthModal'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 const USERS_SEED_URL = "/users.seed.json"
 

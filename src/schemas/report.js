@@ -1,5 +1,6 @@
 import { LuBuilding, LuDroplet, LuSun, LuTrash2, LuTriangleAlert, LuVolume2 } from 'react-icons/lu'
 import { boolean, number, object, string } from 'yup'
+import { APP_PATHS } from '../libs/router'
 
 export const REPORT_CATEGORIES = {
   'cat-1': {
@@ -56,13 +57,27 @@ export const REPORT_CATEGORIES = {
 export const REPORT_CATEGORY_IDS = Object.entries(REPORT_CATEGORIES).map(([key]) => key)
 
 export const AREA_IDS = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6']
-export const STATUSES = ['submitted', 'received', 'in-review', 'assigned', 'awaiting-info', 'resolved', 'closed']
+
+export const REPORT_STATUSES = Object.freeze({
+  SUBMITTED: 'submitted',
+  RECEIVED: 'redeived',
+  IN_REVIEW: 'in-review',
+  ASSIGNED: 'assigned',
+  AWAITING_INFO: 'awaiting-info',
+  RESOLVED: 'resolved',
+  CLOSED: 'closed'
+})
+
+/**
+ * @typedef {typeof REPORT_STATUSES[keyof typeof REPORT_STATUSES]} ReportStatus
+ */
+
 const PHONE = /^(\+62|62|0)8\d{8,11}$/
 
 export const ReportSchema = object({
   id: string().required(),
-  status: string().oneOf(STATUSES).default('submitted'),
-  
+  status: string().oneOf(Object.values(REPORT_STATUSES)).default('submitted'),
+
   cat: string()
     .oneOf(REPORT_CATEGORY_IDS, 'Select a category')
     .required('Select a category'),
@@ -111,3 +126,38 @@ export const CreateReportSchema = ReportSchema.pick(['cat', 'area', 'address', '
 export const REPORT_FIELDS = Object.fromEntries(
   Object.keys(CreateReportSchema.fields).map((key) => [key, key])
 )
+
+export const FILE_REPORT_STEPS = Object.freeze({
+  cat: {
+    handle: 'cat',
+    label: 'Topic',
+    title: 'What needs fixing?',
+    desc: 'Select the municipal service category that best matches the issue observed.',
+    path: APP_PATHS.report.new.root,
+    fields: [REPORT_FIELDS.cat]
+  },
+  location: {
+    handle: 'location',
+    label: 'Location',
+    title: 'Where is it located?',
+    desc: 'Provide street address, RT/RW, or notable landmark for inspection crews.',
+    path: APP_PATHS.report.new.location,
+    fields: [REPORT_FIELDS.area, REPORT_FIELDS.address]
+  },
+  evidence: {
+    handle: 'evidence',
+    label: 'Proof',
+    title: 'Attach evidence',
+    desc: 'Reports with photographic proof or audio notes are prioritized by field dispatchers.',
+    path: APP_PATHS.report.new.evidence,
+    fields: []
+  },
+  details: {
+    handle: 'details',
+    label: 'Review & Send',
+    title: 'Report summary & declaration',
+    desc: 'Review the report and choose notifications before final submission.',
+    path: APP_PATHS.report.new.details,
+    fields: [REPORT_FIELDS.title, REPORT_FIELDS.details, REPORT_FIELDS.asAnon, REPORT_FIELDS.name, REPORT_FIELDS.email, REPORT_FIELDS.phone, REPORT_FIELDS.alertEmail, REPORT_FIELDS.alertSms, REPORT_FIELDS.confirmation]
+  }
+})

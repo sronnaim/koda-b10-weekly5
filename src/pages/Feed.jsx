@@ -1,9 +1,9 @@
 import { LuBuilding, LuDroplets, LuMap, LuMenu, LuSearch, LuSun, LuTrash2, LuTrees, LuTriangleAlert, LuVolume2 } from "react-icons/lu"
-import { useReports } from "../hooks/useReports"
 import FeedListItem from "../components/FeedListItem"
+import { useSelector } from "react-redux"
 
 export default function Feed() {
-  const { reports } = useReports()
+  const reports = useSelector(state => state.reports)
   return (
     <main className="max-w-272 container grow mx-auto px-4 mt-10 md:mt-16">
       <div>

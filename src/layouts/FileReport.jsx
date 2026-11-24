@@ -1,18 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { FormProvider, useForm } from "react-hook-form"
 import { LuShield } from "react-icons/lu"
-import { Link, Outlet, ScrollRestoration, useMatches, useNavigate } from "react-router"
-import { CreateReportSchema } from "../schemas/report"
-import { useEffect, useState } from "react"
-import { useReports } from "../hooks/useReports"
-import { FILE_REPORT_STEPS, getNextStep, getPrevStep, getStepIndexByHandle, getStepsLength } from "../components/libs/fileReport"
-import { APP_PATHS } from "../components/libs/paths"
-import { useSelector } from "react-redux"
+import { Link, Navigate, Outlet, ScrollRestoration, useMatches, useNavigate } from "react-router"
+import { CreateReportSchema, FILE_REPORT_STEPS, REPORT_STATUSES } from "../schemas/report"
+import { useDispatch, useSelector } from "react-redux"
 import { findUserById } from "../api/users"
+import { createReport } from "../redux/slices/reports.slice"
+import { generateId } from "../utils/generateReportId"
+import moment from "moment"
+import { getNextStep, getPrevStep, getStepIndexByHandle, getStepsLength } from "../utils/fileReport"
+import { APP_PATHS } from "../libs/router"
 
 export default function FileReport() {
   const navigate = useNavigate()
-  const { create } = useReports()
   const handle = useMatches().at(-1)?.handle
   const step = FILE_REPORT_STEPS[handle]
   const stepsLength = getStepsLength()
@@ -20,26 +20,35 @@ export default function FileReport() {
   const next = getNextStep(handle)
   const prev = getPrevStep(handle)
   const authenticatedUser = useSelector(state => state.auth)
-  const [user] = useState(() => authenticatedUser ? findUserById(authenticatedUser.id) : null)
+  const user = authenticatedUser ? findUserById(authenticatedUser.id) : null
+  const rdxDispatch = useDispatch()
+  const reports = useSelector(state => state.reports)
 
   const methods = useForm({
     resolver: yupResolver(CreateReportSchema),
     mode: 'onSubmit',
   })
 
-  useEffect(() => {
-    if (!user)
-      navigate(APP_PATHS.home)
-
-  }, [user, navigate])
-
   function onSubmit(data) {
     if (!user.id)
       return
 
-    const created = create(data, user.id)
+    let id = generateId()
 
-    navigate(`/receipt/${created.id}`)
+    while (reports.find(r => r.id === id)) {
+      id = generateId()
+    }
+
+    const newReport = {
+      ...data,
+      id,
+      authorId: user.id,
+      status: REPORT_STATUSES.SUBMITTED,
+      createdAt: moment().unix()
+    }
+    rdxDispatch(createReport(newReport))
+
+    navigate(`${APP_PATHS.receipt.root}/${id}`)
   }
 
   async function handleContinue(e) {
@@ -48,6 +57,9 @@ export default function FileReport() {
     if (valid)
       navigate(next.path)
   }
+
+  if (!user)
+    return <Navigate to={APP_PATHS.home} />
 
   return (
     <main className="mx-auto container max-w-272 grow px-4 mt-10 md:mt-16" id="new-report">
@@ -104,7 +116,7 @@ export default function FileReport() {
                   className="mt-4 pt-6 flex flex-wrap justify-between font-semibold text-sm items-center border-t border-outline">
                   {prev
                     ? <Link className="text-primary" to={prev.path}>← Back</Link>
-                    : <Link className="text-primary" to="/">Cancel</Link>
+                    : <Link className="text-primary" to={APP_PATHS.home}>Cancel</Link>
                   }
                   {!next
                     ? <button type="submit" key="submit" className="flex items-center px-5 py-3 bg-primary text-on-primary rounded-full">Dispatch report →</button>
