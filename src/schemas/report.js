@@ -1,5 +1,5 @@
 import { LuBuilding, LuDroplet, LuSun, LuTrash2, LuTriangleAlert, LuVolume2 } from 'react-icons/lu'
-import { boolean, number, object, string } from 'yup'
+import { array, boolean, mixed, number, object, string } from 'yup'
 import { APP_PATHS } from '../libs/router'
 
 export const REPORT_CATEGORIES = {
@@ -84,6 +84,17 @@ export const ReportSchema = object({
   area: string().required('Select an area'),
   address: string().trim().min(5, 'Be more specific').required('Address or landmark required'),
 
+  evidences: array()
+    .transform((value, original) =>
+      original instanceof FileList ? Array.from(original) : value
+    )
+    .of(
+      mixed()
+        .test('is-file', f => f instanceof File)
+    )
+    .max(2, "You can attach up to only 2 evidences")
+    .default([]),
+
   title: string().trim().min(5, 'Title too short').max(100, 'Max 100 characters').required('Title required'),
   details: string()
     .trim()
@@ -118,7 +129,7 @@ export const ReportSchema = object({
  * @typedef {import('yup').InferType<typeof ReportSchema>} Report
  */
 
-export const CreateReportSchema = ReportSchema.pick(['cat', 'area', 'address', 'title', 'details', 'asAnon', 'name', 'email', 'phone', 'alertEmail', 'alertSms', 'confirmation'])
+export const CreateReportSchema = ReportSchema.pick(['cat', 'area', 'address', 'title', 'details', 'asAnon', 'name', 'email', 'phone', 'evidences', 'alertEmail', 'alertSms', 'confirmation'])
 
 /** @type {{ [K in keyof import("yup").InferType<typeof CreateReportSchema>]: K }} */
 export const REPORT_FIELDS = Object.fromEntries(
@@ -148,7 +159,7 @@ export const FILE_REPORT_STEPS = Object.freeze({
     title: 'Attach evidence',
     desc: 'Reports with photographic proof or audio notes are prioritized by field dispatchers.',
     path: APP_PATHS.report.new.evidence,
-    fields: []
+    fields: [REPORT_FIELDS.evidences]
   },
   details: {
     handle: 'details',
