@@ -21,5 +21,6 @@ export const APP_PATHS = Object.freeze({
   help: '/help',
   receipt: {
     root: '/receipt'
-  }
+  },
+  admin: '/admin'
 })

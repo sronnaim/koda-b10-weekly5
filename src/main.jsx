@@ -26,6 +26,7 @@ import { persistor, store } from './redux/store'
 import './index.css'
 import { FILE_REPORT_STEPS } from './schemas/report'
 import { APP_PATHS } from './libs/router'
+import Admin from './pages/Admin'
 
 export const router = createBrowserRouter([{
   Component: AppLayout,
@@ -89,6 +90,9 @@ export const router = createBrowserRouter([{
   }, {
     path: '/receipt/:id',
     Component: Receipt,
+  }, {
+    path: 'admin',
+    Component: Admin
   }]
 }])
 
